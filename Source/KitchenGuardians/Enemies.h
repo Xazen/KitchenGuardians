@@ -41,17 +41,17 @@ public:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "EnemyProps")
 	TArray<USplineComponent*> splineList;
 
-	// Current Spline
+	// index of Current Spline
 	UPROPERTY(BlueprintReadWrite, Category = "EnemyProps")
 	uint8 currentSpline;
 	
-	// Distance Percentage
+	// Distance Percentage the enemy is located on the current Spline
 	UPROPERTY(BlueprintReadWrite, Category = "EnemyProps")
 	float distPerc;
 
-	// Micha will write something here
+	// Which Guardian this Enemy will be reducing hitpoints when reaching the end of its path
 	UPROPERTY(BlueprintReadWrite, Category = "EnemyProps")
-	uint8 botHitCase;
+	uint8 guardianHitCase;
 
 	// Guardian 1 Reference
 	UPROPERTY(BlueprintReadWrite, Category = "EnemyProps")
@@ -73,17 +73,25 @@ public:
 	UFUNCTION(BlueprintCallable, Category = "EnemyFunctions")
 	void MoveEnemyAlongSpline();
 
-	// Micha will write something here
+	// Calculate the new Distance Percentage for moving the Enemy along its current Spline
 	UFUNCTION(BlueprintCallable, Category = "EnemyFunctions")
 	void CalculateDistancePercentage(float deltaTime);
 
-	// Micha will write something here
+	// Check whether an Enemy reached the End of this or all Splines
 	UFUNCTION(BlueprintCallable, Category = "EnemyFunctions")
 	void CheckDistancePercentage();
 
 	// Take calculated Damage and assign it to enemy
 	UFUNCTION(BlueprintCallable, Category = "EnemyFunctions")
-	void GotHit(UParticleSystem *emitterTemplate, uint8 calculatedDamage);
+	void GotHit(uint8 calculatedDamage);
+
+	// plays all the Effects(particles, sounds, giblets...) when an Enemy got hit by an projectile  - but has remaining hitpoints
+	UFUNCTION(BlueprintCallable, Category = "EnemyFunctions")
+	void GotHitEffect(UParticleSystem *emitterTemplate);
+
+	// plays all the Effects when an Enemy dies (particles, sounds, giblets...)
+	UFUNCTION(BlueprintCallable, Category = "EnemyFunctions")
+	void DiedEffect(UParticleSystem *emitterTemplate);
 
 
 };

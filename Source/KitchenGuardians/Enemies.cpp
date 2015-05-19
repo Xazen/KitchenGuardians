@@ -14,7 +14,7 @@ AEnemies::AEnemies()
 	jumpSpeed = 0;
 	currentSpline = 0;
 	distPerc = 0.0f;
-	botHitCase = 0;
+	guardianHitCase = 0;
 }
 
 void AEnemies::MoveEnemyAlongSpline()
@@ -42,7 +42,7 @@ void AEnemies::CheckDistancePercentage()
 		}
 		else
 		{
-			switch (botHitCase)
+			switch (guardianHitCase)
 			{
 				case 1:
 					//guardianOne->GotHit();
@@ -59,18 +59,31 @@ void AEnemies::CheckDistancePercentage()
 	}
 }
 
-void AEnemies::GotHit(UParticleSystem *emitterTemplate, uint8 calculatedDamage)
+void AEnemies::GotHit(uint8 calculatedDamage)
 {
-	UGameplayStatics::SpawnEmitterAtLocation(this, emitterTemplate, GetActorLocation(), FRotator::ZeroRotator, true);
 	hitPoints -= calculatedDamage;
+	UParticleSystem *emitterTemplate = nullptr; //unsicher: parameterübergabe?
 	if (hitPoints <= 0)
 	{
-		// riceBot->PlaySoundAtLocation()
+		DiedEffect(emitterTemplate); //unsicher: parameter?
+
 		// riceBot->Scorred(baseScore);
 		Destroy();
 	}
 	else
 	{
-		// riceBot->PlaySoundAtLocation()
+		GotHitEffect(emitterTemplate); //unsicher: parameter?
 	}
+}
+
+void AEnemies::GotHitEffect(UParticleSystem *emitterTemplate)
+{
+	UGameplayStatics::SpawnEmitterAtLocation(this, emitterTemplate, GetActorLocation(), FRotator::ZeroRotator, true);
+		// riceBot->PlaySoundAtLocation()
+}
+
+void AEnemies::DiedEffect(UParticleSystem *emitterTemplate)
+{
+	UGameplayStatics::SpawnEmitterAtLocation(this, emitterTemplate, GetActorLocation(), FRotator::ZeroRotator, true);
+	// riceBot->PlaySoundAtLocation()
 }
