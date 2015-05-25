@@ -84,6 +84,10 @@ public:
 	///	UFUNCTIONS
 	///
 
+	// Called when the game starts or when spawned
+	virtual void BeginPlay() override;
+
+
 	// MoveEnemyAlongSpline
 	UFUNCTION(BlueprintCallable, Category = "EnemyFunctions")
 	void MoveEnemyAlongSpline();

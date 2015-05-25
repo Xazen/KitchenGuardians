@@ -17,6 +17,14 @@ AEnemies::AEnemies()
 	guardianHitCase = 0;
 }
 
+// Called when the game starts or when spawned
+void AEnemies::BeginPlay()
+{
+	Super::BeginPlay();
+	GotHit(0);
+}
+
+
 void AEnemies::MoveEnemyAlongSpline()
 {
 	FVector newLocation = splineList[currentSpline]->GetWorldLocationAtDistanceAlongSpline(splineList[currentSpline]->GetSplineLength() * distPerc);
