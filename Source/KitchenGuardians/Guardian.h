@@ -24,6 +24,8 @@ class KITCHENGUARDIANS_API AGuardian : public AActor
 	
 public:	
 
+
+	FTimerHandle reloadTimerHandle;
 	///
 	///	UPROPERTYS
 	///
@@ -48,7 +50,7 @@ public:
 		float projectilesMaximum; //float because of possible "over time" or "swipe length" depletion
 
 	// current amount of projectiles of this Guardian
-	UPROPERTY(BlueprintReadWrite, Category = "Ammunition")
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Ammunition")
 		float projectilesCurrent; //float because of possible "over time" or "swipe length" depletion
 
 
@@ -121,12 +123,21 @@ public:
 	UFUNCTION(BlueprintCallable, Category = "AmmunitionFunctions")
 		void Shot();
 
-
-	// Whether this guardian can shoot or not (depending on ammunition and hitpoints and active-status)
+		// Whether this guardian can shoot or not (depending on ammunition and hitpoints and active-status)
 	UFUNCTION(BlueprintCallable, Category = "AmmunitionFunctions")
 		bool canShoot();
 
+	// will add +1 projectile
+	UFUNCTION(BlueprintCallable, Category = "AmmunitionFunctions")
+		void addProjectile();
 
+	// will pause the reloadTimer
+	UFUNCTION(BlueprintCallable, Category = "AmmunitionFunctions")
+		void pauseReload();
+
+	// will unPause the reloadTimer
+	UFUNCTION(BlueprintCallable, Category = "AmmunitionFunctions")
+		void unpauseReload();
 
 	// Sets default values for this actor's properties
 	AGuardian();

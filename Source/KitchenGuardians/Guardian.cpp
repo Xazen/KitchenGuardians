@@ -9,7 +9,7 @@ AGuardian::AGuardian()
 {
  	// Set this actor to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
 	PrimaryActorTick.bCanEverTick = true;
-
+	projectilesRefillTime = 3.0f;
 }
 
 // Called when the game starts or when spawned
@@ -18,17 +18,23 @@ void AGuardian::BeginPlay()
 	Super::BeginPlay();
 	projectilesCurrent = projectilesMaximum;
 	reviveTapsCurrent = reviveTapsStart;
+	GetWorld()->GetTimerManager().SetTimer(reloadTimerHandle, this, &AGuardian::GotHit, projectilesRefillTime, true, (-1.0f));
+	if (GEngine)
+		GEngine->AddOnScreenDebugMessage(-1, 0.1f, FColor::White, TEXT("reload"));
 }
 
 // Called every frame
 void AGuardian::Tick( float DeltaTime )
 {
 	Super::Tick( DeltaTime );
-
 }
 
 void AGuardian::GotHit()
 {
+	if(GEngine)
+		GEngine->AddOnScreenDebugMessage(-1, 0.1f, FColor::White, TEXT("THIS is PATRICK!"));
+
+
 	if (isDead())
 	{
 		reviveTapsCurrent -= reviveTapsRemovedEnemy;
@@ -88,4 +94,22 @@ void AGuardian::Activate()
 void AGuardian::Deactivate()
 {
 	activated = false;
+}
+
+void AGuardian::pauseReload()
+{
+	GetWorld()->GetTimerManager().PauseTimer(reloadTimerHandle);
+
+}
+
+void AGuardian::unpauseReload()
+{
+	GetWorld()->GetTimerManager().UnPauseTimer(reloadTimerHandle);
+}
+
+void AGuardian::addProjectile()
+{
+	projectilesCurrent++;
+	if (projectilesCurrent > projectilesMaximum)
+		projectilesCurrent = projectilesMaximum;
 }
