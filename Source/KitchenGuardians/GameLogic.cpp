@@ -19,13 +19,17 @@ void AGameLogic::AddScore(uint32 addedScore)
 }
 
 //unfinished
-uint32 AGameLogic::calculateScore(uint8 enemyType, uint8 attackType, int32 multiplier, int32 bonus)
+uint32 AGameLogic::calculateScore(enemyTypeEnum enemyType, guardianTypeEnum guardianType, int32 multiplier, int32 bonus)
 {
 	uint32 calculatedScore=0;
 
-	//switch on enemy and attacktype
-	//enum for enemytype may be better
-	calculatedScore = enemyType *multiplier + bonus;
+	//switch on enemy and guardiantype
+	if (enemyType == enemyTypeEnum::VE_Drink)
+	{
+		//do something...
+
+	}
+	calculatedScore = 1.0f *multiplier + bonus;
 
 	return calculatedScore;
 }

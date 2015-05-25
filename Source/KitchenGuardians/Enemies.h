@@ -8,6 +8,16 @@
 
 #include "Enemies.generated.h"
 
+
+UENUM(BlueprintType)		//"BlueprintType" is essential to include
+enum class enemyTypeEnum : uint8
+{
+	VE_Meat 	UMETA(DisplayName = "Meat"),
+	VE_Vegetable 	UMETA(DisplayName = "Vegetable"),
+	VE_Drink	UMETA(DisplayName = "Drink")
+};
+
+
 UCLASS()
 class KITCHENGUARDIANS_API AEnemies : public AActor
 {
@@ -20,6 +30,11 @@ public:
 	///
 	///	UPROPERTYS
 	///
+
+	//type of Enemy
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "EnemyProps")
+		enemyTypeEnum enemyType;
+
 
 	// Hitpoints of Enemy
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "EnemyProps")

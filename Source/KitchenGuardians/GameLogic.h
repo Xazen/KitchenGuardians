@@ -3,6 +3,9 @@
 #pragma once
 
 #include "GameFramework/Actor.h"
+#include "Enemies.h" //in order to use the enum for its type
+#include "Guardian.h" //in order to use the enum for its type
+
 #include "GameLogic.generated.h"
 
 UCLASS()
@@ -38,7 +41,7 @@ public:
 	// calculate a Score depending on the Enemy - the Type of Attack - a Multiplier and a Bonus (last are just predicted optional values with default values)
 	//default values just working with int32 sorry :(
 	UFUNCTION(BlueprintCallable, Category = "ScoringFunctions")
-		uint32 calculateScore(uint8 enemyType, uint8 attackType, int32 multiplier = 1, int32 bonus = 0);
+		uint32 calculateScore(enemyTypeEnum enemyType, guardianTypeEnum guardianType, int32 multiplier = 1, int32 bonus = 0);
 
 	// Calculate the new spawnTimeDelta
 	UFUNCTION(BlueprintCallable, Category = "SpawningFunctions")
