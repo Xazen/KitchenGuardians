@@ -8,13 +8,14 @@
 AEnemies::AEnemies()
 {
 	// Sets default values for this actor's properties
-	hitPoints = 0;
-	baseDamage = 0;
-	baseScore = 0;
-	jumpSpeed = 0;
+	hitPoints = 3;
+	baseDamage = 1;
+	baseScore = 100;
+	jumpSpeed = 1;
 	currentSpline = 0;
 	distPerc = 0.0f;
 	guardianHitCase = 0;
+
 }
 
 // Called when the game starts or when spawned

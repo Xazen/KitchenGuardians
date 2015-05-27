@@ -17,6 +17,7 @@ enum class enemyTypeEnum : uint8
 	VE_Drink	UMETA(DisplayName = "Drink")
 };
 
+//test
 
 UCLASS()
 class KITCHENGUARDIANS_API AEnemies : public AActor

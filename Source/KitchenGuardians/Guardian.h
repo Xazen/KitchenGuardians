@@ -70,9 +70,13 @@ public:
 	UPROPERTY(BlueprintReadWrite, Category = "Revive Mechanic")
 		uint8 reviveTapsCurrent;
 
-	// amount of Taps removed per second
+	// amount of Taps changed per second
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Revive Mechanic")
 		uint8 reviveTapsRemovedSecond;
+
+	// whether Taps will be added or removed per second (put -1, 0 or 1 in here)
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Revive Mechanic")
+		uint8 reviveTapsRemovedSecondMultiplier;
 
 	// amount of Taps removed when hit via Enemy
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Revive Mechanic")

@@ -9,6 +9,19 @@ AGuardian::AGuardian()
 {
  	// Set this actor to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
 	PrimaryActorTick.bCanEverTick = true;
+	activated = true;
+	hitpoints = 2;
+	projectilesMaximum = 20;
+	projectilesCurrent = projectilesMaximum;
+	reviveTapsMaximum = 20;
+	reviveTapsStart = 5;
+	reviveTapsRemovedSecond = 1;
+	reviveTapsRemovedSecondMultiplier = 1;
+	reviveTapsRemovedEnemy = 5;
+	reviveHitpointsFirst = 2;
+	reviveHitpointsNext = 1;
+	reviveTapsAdditional = 5;
+	reviveIsFirst = true;
 	projectilesRefillTime = 3.0f;
 }
 
