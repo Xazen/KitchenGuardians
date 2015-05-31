@@ -39,15 +39,15 @@ public:
 
 	// Hitpoints of Enemy
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "EnemyProps")
-	int8 hitPoints;
+	int32 hitPoints;
 
 	// Damage of Enemy
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "EnemyProps")
-	uint8 baseDamage;
+	int32 baseDamage;
 
 	// Score of Enemy
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "EnemyProps")
-	uint8 baseScore;
+	int32 baseScore;
 
 	// Speed of Enemy
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "EnemyProps")
@@ -59,7 +59,7 @@ public:
 
 	// index of Current Spline
 	UPROPERTY(BlueprintReadWrite, Category = "EnemyProps")
-	uint8 currentSpline;
+	int32 currentSpline;
 	
 	// Distance Percentage the enemy is located on the current Spline
 	UPROPERTY(BlueprintReadWrite, Category = "EnemyProps")
@@ -67,7 +67,7 @@ public:
 
 	// Which Guardian this Enemy will be reducing hitpoints when reaching the end of its path
 	UPROPERTY(BlueprintReadWrite, Category = "EnemyProps")
-	uint8 guardianHitCase;
+	int32 guardianHitCase;
 
 	// Guardian 1 Reference
 	UPROPERTY(BlueprintReadWrite, Category = "EnemyProps")
@@ -103,7 +103,7 @@ public:
 
 	// Take calculated Damage and assign it to enemy
 	UFUNCTION(BlueprintCallable, Category = "EnemyFunctions")
-	void GotHit(uint8 calculatedDamage);
+	void GotHit(int32 calculatedDamage);
 
 	// plays all the Effects(particles, sounds, giblets...) when an Enemy got hit by an projectile  - but has remaining hitpoints
 	UFUNCTION(BlueprintCallable, Category = "EnemyFunctions")

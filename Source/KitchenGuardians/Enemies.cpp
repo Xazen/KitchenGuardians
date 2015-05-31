@@ -68,7 +68,7 @@ void AEnemies::CheckDistancePercentage()
 	}
 }
 
-void AEnemies::GotHit(uint8 calculatedDamage)
+void AEnemies::GotHit(int32 calculatedDamage)
 {
 	hitPoints -= calculatedDamage;
 	UParticleSystem *emitterTemplate = nullptr; //unsicher: parameterübergabe?

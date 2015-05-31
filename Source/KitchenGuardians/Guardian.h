@@ -42,7 +42,7 @@ public:
 
 	// hitpoints of this Guardian
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "GuardianProps")
-		uint8 hitpoints;
+		int32 hitpoints;
 
 
 	// initial and maximum amount of projectiles of this Guardian
@@ -60,39 +60,39 @@ public:
 
 	// amount of maximum Taps necessary to Revive the Guardian, i.e. the target value
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Revive Mechanic")
-		uint8 reviveTapsMaximum;
+		int32 reviveTapsMaximum;
 
 	// amount of initial Taps Revive Process begins with
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Revive Mechanic")
-		uint8 reviveTapsStart;
+		int32 reviveTapsStart;
 
 	// amount of current Taps of this Revive Process
 	UPROPERTY(BlueprintReadWrite, Category = "Revive Mechanic")
-		uint8 reviveTapsCurrent;
+		int32 reviveTapsCurrent;
 
 	// amount of Taps changed per second
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Revive Mechanic")
-		uint8 reviveTapsRemovedSecond;
+		int32 reviveTapsRemovedSecond;
 
 	// whether Taps will be added or removed per second (put -1, 0 or 1 in here)
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Revive Mechanic")
-		uint8 reviveTapsRemovedSecondMultiplier;
+		int32 reviveTapsRemovedSecondMultiplier;
 
 	// amount of Taps removed when hit via Enemy
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Revive Mechanic")
-		uint8 reviveTapsRemovedEnemy;
+		int32 reviveTapsRemovedEnemy;
 
 	// Hitpoints the Guardian gets after the first Revive
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Revive Mechanic")
-		uint8 reviveHitpointsFirst;
+		int32 reviveHitpointsFirst;
 
 	// Hitpoints the Guardian gets every additional Revive
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Revive Mechanic")
-		uint8 reviveHitpointsNext;
+		int32 reviveHitpointsNext;
 
 	// Additional Taps necessary for the next revive (added on Top of reviveTapsMaximum after each revive)
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Revive Mechanic")
-		uint8 reviveTapsAdditional;
+		int32 reviveTapsAdditional;
 
 	// Flag to check whether the current revive is the first one
 	UPROPERTY(BlueprintReadWrite, Category = "Revive Mechanic")

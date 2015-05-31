@@ -13,15 +13,15 @@ AGameLogic::AGameLogic()
 	spawnTimeDelta = 2.5f;
 }
 
-void AGameLogic::AddScore(uint32 addedScore)
+void AGameLogic::AddScore(int32 addedScore)
 {
 	highScore += addedScore;
 }
 
 //unfinished
-uint32 AGameLogic::calculateScore(enemyTypeEnum enemyType, guardianTypeEnum guardianType, int32 multiplier, int32 bonus)
+int32 AGameLogic::calculateScore(enemyTypeEnum enemyType, guardianTypeEnum guardianType, int32 multiplier, int32 bonus)
 {
-	uint32 calculatedScore=0;
+	int32 calculatedScore=0;
 
 	//switch on enemy and guardiantype
 	if (enemyType == enemyTypeEnum::VE_Drink)

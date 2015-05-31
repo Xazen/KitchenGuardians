@@ -36,12 +36,12 @@ public:
 
 	// Add a Score Value to the Current HighScore
 	UFUNCTION(BlueprintCallable, Category = "ScoringFunctions")
-		void AddScore(uint32 addedScore);
+		void AddScore(int32 addedScore);
 
 	// calculate a Score depending on the Enemy - the Type of Attack - a Multiplier and a Bonus (last are just predicted optional values with default values)
 	//default values just working with int32 sorry :(
 	UFUNCTION(BlueprintCallable, Category = "ScoringFunctions")
-		uint32 calculateScore(enemyTypeEnum enemyType, guardianTypeEnum guardianType, int32 multiplier = 1, int32 bonus = 0);
+		int32 calculateScore(enemyTypeEnum enemyType, guardianTypeEnum guardianType, int32 multiplier = 1, int32 bonus = 0);
 
 	// Calculate the new spawnTimeDelta
 	UFUNCTION(BlueprintCallable, Category = "SpawningFunctions")
