@@ -31,9 +31,11 @@ void AGuardian::BeginPlay()
 	Super::BeginPlay();
 	projectilesCurrent = projectilesMaximum;
 	reviveTapsCurrent = reviveTapsStart;
+	/*
 	GetWorld()->GetTimerManager().SetTimer(reloadTimerHandle, this, &AGuardian::GotHit, projectilesRefillTime, true, (-1.0f));
 	if (GEngine)
 		GEngine->AddOnScreenDebugMessage(-1, 0.1f, FColor::White, TEXT("reload"));
+		*/
 }
 
 // Called every frame
@@ -42,12 +44,8 @@ void AGuardian::Tick( float DeltaTime )
 	Super::Tick( DeltaTime );
 }
 
-void AGuardian::GotHit()
+void AGuardian::GotHit2()
 {
-	if(GEngine)
-		GEngine->AddOnScreenDebugMessage(-1, 0.1f, FColor::White, TEXT("THIS is PATRICK!"));
-
-
 	if (isDead())
 	{
 		reviveTapsCurrent -= reviveTapsRemovedEnemy;
@@ -59,7 +57,7 @@ void AGuardian::GotHit()
 
 }
 
-void AGuardian::Shot()
+void AGuardian::Shot2()
 {
 	projectilesCurrent -= 1;
 }
@@ -91,7 +89,6 @@ void AGuardian::Revive()
 	reviveTapsCurrent = reviveTapsStart;
 
 	reviveTapsMaximum += reviveTapsAdditional;
-	//test
 }
 
 bool AGuardian::isDead()
@@ -109,6 +106,7 @@ void AGuardian::Deactivate()
 	activated = false;
 }
 
+/*
 void AGuardian::pauseReload()
 {
 	GetWorld()->GetTimerManager().PauseTimer(reloadTimerHandle);
@@ -119,7 +117,7 @@ void AGuardian::unpauseReload()
 {
 	GetWorld()->GetTimerManager().UnPauseTimer(reloadTimerHandle);
 }
-
+*/
 void AGuardian::addProjectile()
 {
 	projectilesCurrent++;

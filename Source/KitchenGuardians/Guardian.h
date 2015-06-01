@@ -25,7 +25,9 @@ class KITCHENGUARDIANS_API AGuardian : public AActor
 public:	
 
 
-	FTimerHandle reloadTimerHandle;
+	//FTimerHandle reloadTimerHandle;
+	
+	
 	///
 	///	UPROPERTYS
 	///
@@ -68,7 +70,7 @@ public:
 
 	// amount of current Taps of this Revive Process
 	UPROPERTY(BlueprintReadWrite, Category = "Revive Mechanic")
-		int32 reviveTapsCurrent;
+		float reviveTapsCurrent; //in order to have smoother reduction/gains over time
 
 	// amount of Taps changed per second
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Revive Mechanic")
@@ -95,7 +97,7 @@ public:
 		int32 reviveTapsAdditional;
 
 	// Flag to check whether the current revive is the first one
-	UPROPERTY(BlueprintReadWrite, Category = "Revive Mechanic")
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Revive Mechanic")
 		bool reviveIsFirst;
 
 	///
@@ -112,7 +114,7 @@ public:
 
 	// Calculates new Hitpoints after Guardian is hit by enemy - if necessary will initialize Revive Mechanic
 	UFUNCTION(BlueprintCallable, Category = "HitpointsFunctions")
-		void GotHit(); // i am not sure whether the enemyType matters
+		void GotHit2(); // i am not sure whether the enemyType matters
 
 
 	// Assigns new Values when after a successful revive
@@ -125,7 +127,7 @@ public:
 	
 	// Reduces the Ammunition by one - may not be applicable to Rice Guardian
 	UFUNCTION(BlueprintCallable, Category = "AmmunitionFunctions")
-		void Shot();
+		void Shot2();
 
 		// Whether this guardian can shoot or not (depending on ammunition and hitpoints and active-status)
 	UFUNCTION(BlueprintCallable, Category = "AmmunitionFunctions")
@@ -134,7 +136,7 @@ public:
 	// will add +1 projectile
 	UFUNCTION(BlueprintCallable, Category = "AmmunitionFunctions")
 		void addProjectile();
-
+	/*
 	// will pause the reloadTimer
 	UFUNCTION(BlueprintCallable, Category = "AmmunitionFunctions")
 		void pauseReload();
@@ -142,7 +144,7 @@ public:
 	// will unPause the reloadTimer
 	UFUNCTION(BlueprintCallable, Category = "AmmunitionFunctions")
 		void unpauseReload();
-
+	*/
 	// Sets default values for this actor's properties
 	AGuardian();
 
