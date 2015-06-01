@@ -25,6 +25,18 @@ public:
 	UPROPERTY(BlueprintReadWrite, Category = "GameSessionProps")
 		uint32 highScore;
 
+	// Kill Counter for Chillis
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "GameSessionProps")
+		uint32 killCounterChillis;
+
+	// Kill Counter for Mushrooms
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "GameSessionProps")
+		uint32 killCounterMushrooms;
+
+	// Kill Counter for Onions
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "GameSessionProps")
+		uint32 killCounterOnions;
+
 	// The initial TimeDelta between Spawns
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "SpawningEnemies")
 		float spawnTimeDelta;

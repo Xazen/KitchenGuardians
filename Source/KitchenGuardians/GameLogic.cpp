@@ -10,6 +10,9 @@ AGameLogic::AGameLogic()
  	// Set this actor to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
 	PrimaryActorTick.bCanEverTick = true;
 	highScore = 0;
+	killCounterChillis = 0;
+	killCounterMushrooms = 0;
+	killCounterOnions = 0;
 	spawnTimeDelta = 2.5f;
 }
 
