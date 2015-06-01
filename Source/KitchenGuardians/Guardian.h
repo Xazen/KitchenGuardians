@@ -133,6 +133,15 @@ public:
 	UFUNCTION(BlueprintImplementableEvent, Category = "HitpointsFunctions")
 		void InitRevive(); // i am not sure whether the enemyType matters
 
+	// trigger event for shotFeedback
+	UFUNCTION(BlueprintImplementableEvent, Category = "FeedbackFunctions")
+		void ShotFeedback(); // i am not sure whether the enemyType matters
+
+	// trigger event for gotHitFeedback
+	UFUNCTION(BlueprintImplementableEvent, Category = "FeedbackFunctions")
+		void GotHitFeedback(); // i am not sure whether the enemyType matters
+
+
 	// Assigns new Values when after a successful revive
 	UFUNCTION(BlueprintCallable, Category = "HitpointsFunctions")
 		void Revive();

@@ -55,7 +55,7 @@ void AGuardian::calculateReviveTapCurrent(float deltaSeconds)
 
 void AGuardian::GotHit()
 {
-	doFlash = true;
+	GotHitFeedback();
 	if (reviveIsActive)
 	{
 		reviveTapsCurrent -= reviveTapsRemovedEnemy;
@@ -81,6 +81,7 @@ void AGuardian::GotHit()
 
 void AGuardian::Shot(int32 ammoCost)
 {
+	ShotFeedback();
 	projectilesCurrent -= ammoCost;
 }
 
