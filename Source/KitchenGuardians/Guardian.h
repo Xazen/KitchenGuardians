@@ -100,6 +100,19 @@ public:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Revive Mechanic")
 		bool reviveIsFirst;
 
+	// Flag to check whether the revive mechanic is currently active
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Revive Mechanic")
+		bool reviveIsActive;
+
+	// Flag to check whether the player failed to revived
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Revive Mechanic")
+		bool isDead;
+
+
+	// bool used to execute a red screen flash
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Player Feedback")
+		bool doFlash;
+
 	///
 	///	UFUNCTIONS
 	///
@@ -114,20 +127,23 @@ public:
 
 	// Calculates new Hitpoints after Guardian is hit by enemy - if necessary will initialize Revive Mechanic
 	UFUNCTION(BlueprintCallable, Category = "HitpointsFunctions")
-		void GotHit2(); // i am not sure whether the enemyType matters
-
+		void GotHit(); // i am not sure whether the enemyType matters
+	
+	// trigger event to initialize the revive
+	UFUNCTION(BlueprintImplementableEvent, Category = "HitpointsFunctions")
+		void InitRevive(); // i am not sure whether the enemyType matters
 
 	// Assigns new Values when after a successful revive
 	UFUNCTION(BlueprintCallable, Category = "HitpointsFunctions")
 		void Revive();
 
-	// whether this Guardian has any hitpoints
+	// calculates new revive tap current value every tick for smooth fill bar progress
 	UFUNCTION(BlueprintCallable, Category = "HitpointsFunctions")
-		bool isDead();
+		void calculateReviveTapCurrent(float deltaSeconds);
 	
 	// Reduces the Ammunition by one - may not be applicable to Rice Guardian
 	UFUNCTION(BlueprintCallable, Category = "AmmunitionFunctions")
-		void Shot2();
+		void Shot(int32 ammoCost);
 
 		// Whether this guardian can shoot or not (depending on ammunition and hitpoints and active-status)
 	UFUNCTION(BlueprintCallable, Category = "AmmunitionFunctions")
@@ -136,6 +152,9 @@ public:
 	// will add +1 projectile
 	UFUNCTION(BlueprintCallable, Category = "AmmunitionFunctions")
 		void addProjectile();
+
+
+
 	/*
 	// will pause the reloadTimer
 	UFUNCTION(BlueprintCallable, Category = "AmmunitionFunctions")

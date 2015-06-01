@@ -22,7 +22,11 @@ AGuardian::AGuardian()
 	reviveHitpointsNext = 1;
 	reviveTapsAdditional = 5;
 	reviveIsFirst = true;
+	reviveIsActive = false;
+	isDead = false;
+	doFlash = false;
 	projectilesRefillTime = 3.0f;
+
 }
 
 // Called when the game starts or when spawned
@@ -44,22 +48,40 @@ void AGuardian::Tick( float DeltaTime )
 	Super::Tick( DeltaTime );
 }
 
-void AGuardian::GotHit2()
+void AGuardian::calculateReviveTapCurrent(float deltaSeconds)
 {
-	if (isDead())
+	reviveTapsCurrent += deltaSeconds*reviveTapsRemovedSecond*reviveTapsRemovedSecondMultiplier;
+}
+
+void AGuardian::GotHit()
+{
+	doFlash = true;
+	if (reviveIsActive)
 	{
 		reviveTapsCurrent -= reviveTapsRemovedEnemy;
+		if (reviveTapsCurrent <= 0)
+		{
+			reviveTapsCurrent = 0;
+			isDead = true;
+		}
 	}
 	else{
 		hitpoints -= 1;
-		//if==0 initiate revivemechanic
+		if (hitpoints <= 0)
+		{
+			hitpoints = 0;
+			reviveIsActive = true;
+			InitRevive();
+		}
 	}
 
 }
 
-void AGuardian::Shot2()
+
+
+void AGuardian::Shot(int32 ammoCost)
 {
-	projectilesCurrent -= 1;
+	projectilesCurrent -= ammoCost;
 }
 
 bool AGuardian::canShoot()
@@ -87,15 +109,9 @@ void AGuardian::Revive()
 		hitpoints = reviveHitpointsNext;
 	}
 	reviveTapsCurrent = reviveTapsStart;
-
 	reviveTapsMaximum += reviveTapsAdditional;
+	reviveIsActive = false;
 }
-
-bool AGuardian::isDead()
-{
-	return hitpoints==0;
-}
-
 
 void AGuardian::Activate()
 {
