@@ -25,7 +25,7 @@ public:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "GameSessionProps")
 		int32 highScore;
 
-	// HighScore of Current Game Session
+	// whether the gamesession is over - may be removed and reworked with elegant do once stuffs
 	UPROPERTY(BlueprintReadWrite, Category = "GameSessionProps")
 		bool isGameover;
 	
@@ -54,8 +54,7 @@ public:
 	UFUNCTION(BlueprintCallable, Category = "ScoringFunctions")
 		void AddScore(int32 addedScore, enemyTypeEnum enemyType);
 
-	// calculate a Score depending on the Enemy - the Type of Attack - a Multiplier and a Bonus (last are just predicted optional values with default values)
-	//default values just working with int32 sorry :(
+	// calculate a Score depending on the Enemy - the Type of Attack - a Multiplier and a Bonus (last are just predicted optional values with default values) - not used by now
 	UFUNCTION(BlueprintCallable, Category = "ScoringFunctions")
 		int32 calculateScore(enemyTypeEnum enemyType, guardianTypeEnum guardianType, int32 multiplier = 1, int32 bonus = 0);
 
@@ -64,22 +63,20 @@ public:
 		float newSpawnDeltaTime();
 
 
-	// Calculate the new spawnTimeDelta
+	// initializes the game over sequence
 	UFUNCTION(BlueprintCallable, Category = "GameOver")
 		void gameOver();
 
-	// trigger event for gotHitFeedback
+	// executes the game over sequence
 	UFUNCTION(BlueprintImplementableEvent, Category = "GameOver")
 		void gameOverExecute(); // i am not sure whether the enemyType matters
 
-
-
+	
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
 	
 	// Called every frame
 	virtual void Tick( float DeltaSeconds ) override;
-
 	
 	
 };

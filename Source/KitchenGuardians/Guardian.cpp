@@ -48,9 +48,13 @@ void AGuardian::Tick( float DeltaTime )
 	Super::Tick( DeltaTime );
 }
 
-void AGuardian::calculateReviveTapCurrent(float deltaSeconds)
+void AGuardian::Activate()
 {
-	reviveTapsCurrent += deltaSeconds*reviveTapsRemovedSecond*reviveTapsRemovedSecondMultiplier;
+	activated = true;
+}
+void AGuardian::Deactivate()
+{
+	activated = false;
 }
 
 void AGuardian::GotHit()
@@ -77,6 +81,27 @@ void AGuardian::GotHit()
 
 }
 
+void AGuardian::Revive()
+{
+	if (reviveIsFirst)
+	{
+		reviveIsFirst = false;
+		hitpoints = reviveHitpointsFirst;
+	}
+	else
+	{
+		hitpoints = reviveHitpointsNext;
+	}
+	reviveTapsCurrent = reviveTapsStart;
+	reviveTapsMaximum += reviveTapsAdditional;
+	reviveIsActive = false;
+}
+
+
+void AGuardian::calculateReviveTapCurrent(float deltaSeconds)
+{
+	reviveTapsCurrent += deltaSeconds*reviveTapsRemovedSecond*reviveTapsRemovedSecondMultiplier;
+}
 
 
 void AGuardian::Shot(int32 ammoCost)
@@ -98,46 +123,23 @@ bool AGuardian::canShoot()
 
 }
 
-void AGuardian::Revive()
-{
-	if (reviveIsFirst)
-	{
-		reviveIsFirst = false;
-		hitpoints = reviveHitpointsFirst;
-	}
-	else
-	{
-		hitpoints = reviveHitpointsNext;
-	}
-	reviveTapsCurrent = reviveTapsStart;
-	reviveTapsMaximum += reviveTapsAdditional;
-	reviveIsActive = false;
-}
-
-void AGuardian::Activate()
-{
-	activated = true;
-}
-void AGuardian::Deactivate()
-{
-	activated = false;
-}
-
-/*
-void AGuardian::pauseReload()
-{
-	GetWorld()->GetTimerManager().PauseTimer(reloadTimerHandle);
-
-}
-
-void AGuardian::unpauseReload()
-{
-	GetWorld()->GetTimerManager().UnPauseTimer(reloadTimerHandle);
-}
-*/
 void AGuardian::addProjectile()
 {
 	projectilesCurrent++;
 	if (projectilesCurrent > projectilesMaximum)
 		projectilesCurrent = projectilesMaximum;
 }
+
+
+/*
+void AGuardian::pauseReload()
+{
+GetWorld()->GetTimerManager().PauseTimer(reloadTimerHandle);
+
+}
+
+void AGuardian::unpauseReload()
+{
+GetWorld()->GetTimerManager().UnPauseTimer(reloadTimerHandle);
+}
+*/

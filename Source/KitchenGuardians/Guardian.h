@@ -24,8 +24,8 @@ class KITCHENGUARDIANS_API AGuardian : public AActor
 	
 public:	
 
-
-	//FTimerHandle reloadTimerHandle;
+	// Sets default values for this actor's properties
+	AGuardian();
 	
 	
 	///
@@ -38,7 +38,7 @@ public:
 		guardianTypeEnum guardianType;
 	
 
-	// wether this Guardian is currently active or not - need to figure something out for always on or select guardian mode
+	// whether this Guardian is currently active or not - need to figure something out for always on or select guardian mode
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "GuardianProps")
 		bool activated;
 
@@ -56,7 +56,7 @@ public:
 		float projectilesCurrent; //float because of possible "over time" or "swipe length" depletion
 
 
-	// time in seconds it takes to gain one projectile
+	// time in seconds it takes to gain one projectile -not really used for now
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Ammunition")
 		float projectilesRefillTime; //float because of possible "over time" or "swipe length" depletion
 
@@ -70,9 +70,9 @@ public:
 
 	// amount of current Taps of this Revive Process
 	UPROPERTY(BlueprintReadWrite, Category = "Revive Mechanic")
-		float reviveTapsCurrent; //in order to have smoother reduction/gains over time
+		float reviveTapsCurrent; //in order to have smoother reduction/gains over time ->float
 
-	// amount of Taps changed per second
+	// amount of Taps reduced/gained per second
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Revive Mechanic")
 		int32 reviveTapsRemovedSecond;
 
@@ -104,11 +104,10 @@ public:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Revive Mechanic")
 		bool reviveIsActive;
 
-	// Flag to check whether the player failed to revived
+	// Flag to check whether the player failed to revive
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Revive Mechanic")
 		bool isDead;
-
-
+	
 	// bool used to execute a red screen flash
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Player Feedback")
 		bool doFlash;
@@ -117,11 +116,11 @@ public:
 	///	UFUNCTIONS
 	///
 
-	// activates this guardian so that attacks can be performed with it
+	// activates this guardian so that attacks can be performed with it -not used by now
 	UFUNCTION(BlueprintCallable, Category = "UsabilityFunctions")
 		void Activate(); // i am not sure whether the enemyType matters
 
-	// deactivates this guardian so that no attacks can be performed with it
+	// deactivates this guardian so that no attacks can be performed with it -not used by now
 	UFUNCTION(BlueprintCallable, Category = "UsabilityFunctions")
 		void Deactivate(); // i am not sure whether the enemyType matters
 
@@ -135,11 +134,11 @@ public:
 
 	// trigger event for shotFeedback
 	UFUNCTION(BlueprintImplementableEvent, Category = "FeedbackFunctions")
-		void ShotFeedback(); // i am not sure whether the enemyType matters
+		void ShotFeedback(); 
 
 	// trigger event for gotHitFeedback
 	UFUNCTION(BlueprintImplementableEvent, Category = "FeedbackFunctions")
-		void GotHitFeedback(); // i am not sure whether the enemyType matters
+		void GotHitFeedback(); 
 
 
 	// Assigns new Values when after a successful revive
@@ -164,17 +163,7 @@ public:
 
 
 
-	/*
-	// will pause the reloadTimer
-	UFUNCTION(BlueprintCallable, Category = "AmmunitionFunctions")
-		void pauseReload();
 
-	// will unPause the reloadTimer
-	UFUNCTION(BlueprintCallable, Category = "AmmunitionFunctions")
-		void unpauseReload();
-	*/
-	// Sets default values for this actor's properties
-	AGuardian();
 
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
@@ -183,5 +172,17 @@ public:
 	virtual void Tick( float DeltaSeconds ) override;
 
 	
+
+
+	//FTimerHandle reloadTimerHandle;
+	/*
+	// will pause the reloadTimer
+	UFUNCTION(BlueprintCallable, Category = "AmmunitionFunctions")
+	void pauseReload();
+
+	// will unPause the reloadTimer
+	UFUNCTION(BlueprintCallable, Category = "AmmunitionFunctions")
+	void unpauseReload();
+	*/
 	
 };

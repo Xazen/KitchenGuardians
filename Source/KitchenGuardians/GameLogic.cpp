@@ -57,6 +57,13 @@ float AGameLogic::newSpawnDeltaTime()
 
 }
 
+void AGameLogic::gameOver()
+{
+	isGameover = true;
+	gameOverExecute();
+}
+
+
 // Called when the game starts or when spawned
 void AGameLogic::BeginPlay()
 {
@@ -69,10 +76,5 @@ void AGameLogic::Tick( float DeltaTime )
 {
 	Super::Tick( DeltaTime );
 
-}
-void AGameLogic::gameOver()
-{
-	isGameover = true;
-	gameOverExecute();
 }
 
