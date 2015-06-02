@@ -22,21 +22,25 @@ public:
 	///
 
 	// HighScore of Current Game Session
-	UPROPERTY(BlueprintReadWrite, Category = "GameSessionProps")
-		uint32 highScore;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "GameSessionProps")
+		int32 highScore;
 
+	// HighScore of Current Game Session
+	UPROPERTY(BlueprintReadWrite, Category = "GameSessionProps")
+		bool isGameover;
+	
 	// Kill Counter for Chillis
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "GameSessionProps")
-		uint32 killCounterChillis;
+		int32 killCounterChillis;
 
 	// Kill Counter for Mushrooms
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "GameSessionProps")
-		uint32 killCounterMushrooms;
+		int32 killCounterMushrooms;
 
 	// Kill Counter for Onions
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "GameSessionProps")
-		uint32 killCounterOnions;
-
+		int32 killCounterOnions;
+	
 	// The initial TimeDelta between Spawns
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "SpawningEnemies")
 		float spawnTimeDelta;
@@ -58,6 +62,16 @@ public:
 	// Calculate the new spawnTimeDelta
 	UFUNCTION(BlueprintCallable, Category = "SpawningFunctions")
 		float newSpawnDeltaTime();
+
+
+	// Calculate the new spawnTimeDelta
+	UFUNCTION(BlueprintCallable, Category = "GameOver")
+		void gameOver();
+
+	// trigger event for gotHitFeedback
+	UFUNCTION(BlueprintImplementableEvent, Category = "GameOver")
+		void gameOverExecute(); // i am not sure whether the enemyType matters
+
 
 
 	// Called when the game starts or when spawned

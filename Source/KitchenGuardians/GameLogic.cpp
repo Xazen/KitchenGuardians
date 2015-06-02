@@ -14,6 +14,7 @@ AGameLogic::AGameLogic()
 	killCounterMushrooms = 0;
 	killCounterOnions = 0;
 	spawnTimeDelta = 2.5f;
+	isGameover = false;
 }
 
 void AGameLogic::AddScore(int32 addedScore)
@@ -57,5 +58,10 @@ void AGameLogic::Tick( float DeltaTime )
 {
 	Super::Tick( DeltaTime );
 
+}
+void AGameLogic::gameOver()
+{
+	isGameover = true;
+	gameOverExecute();
 }
 
