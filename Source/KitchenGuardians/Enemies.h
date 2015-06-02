@@ -5,6 +5,7 @@
 #include "GameFramework/Actor.h"
 #include "Classes/Components/SplineComponent.h"
 #include "Classes/Particles/ParticleSystem.h"
+#include "Guardian.h"
 
 #include "Enemies.generated.h"
 
@@ -41,9 +42,9 @@ public:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "EnemyProps")
 	int32 hitPoints;
 
-	// Damage of Enemy
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "EnemyProps")
-	int32 baseDamage;
+	// Hitpoints of Enemy
+	UPROPERTY(BlueprintReadWrite, Category = "EnemyProps")
+	int32 hitPointsForTaps;
 
 	// Score of Enemy
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "EnemyProps")
@@ -65,21 +66,29 @@ public:
 	UPROPERTY(BlueprintReadWrite, Category = "EnemyProps")
 	float distPerc;
 
+	// the point where the knifes spawn
+	UPROPERTY(BlueprintReadWrite, Category = "EnemyProps")
+		FTransform knifeSpawn;
+
 	// Which Guardian this Enemy will be reducing hitpoints when reaching the end of its path
 	UPROPERTY(BlueprintReadWrite, Category = "EnemyProps")
-	int32 guardianHitCase;
+		int32 guardianHitCase;
+		//guardianTypeEnum guardianHitCase;
 
 	// Guardian 1 Reference
 	UPROPERTY(BlueprintReadWrite, Category = "EnemyProps")
-	AActor *guardianOne;
+	AGuardian *guardianRice;
 
 	// Guardian 2 Reference
 	UPROPERTY(BlueprintReadWrite, Category = "EnemyProps")
-	AActor *guardianTwo;
+	AGuardian *guardianToast;
 
 	// Guardian 3 Reference
 	UPROPERTY(BlueprintReadWrite, Category = "EnemyProps")
-	AActor *guardianThree;
+	AGuardian *guardianIce;
+
+	//UPROPERTY(BlueprintReadWrite, Category = "EnemyProps")
+	//transform
 
 	///
 	///	UFUNCTIONS
@@ -103,15 +112,34 @@ public:
 
 	// Take calculated Damage and assign it to enemy
 	UFUNCTION(BlueprintCallable, Category = "EnemyFunctions")
-	void GotHit(int32 calculatedDamage);
+		void GotHit(guardianTypeEnum guardianType);
 
 	// plays all the Effects(particles, sounds, giblets...) when an Enemy got hit by an projectile  - but has remaining hitpoints
-	UFUNCTION(BlueprintCallable, Category = "EnemyFunctions")
-	void GotHitEffect(UParticleSystem *emitterTemplate);
+	// trigger event for gotHitFeedback
+	UFUNCTION(BlueprintImplementableEvent, Category = "FeedbackFunctions")
+		void GotHitFeedback();
 
 	// plays all the Effects when an Enemy dies (particles, sounds, giblets...)
-	UFUNCTION(BlueprintCallable, Category = "EnemyFunctions")
-	void DiedEffect(UParticleSystem *emitterTemplate);
+	// trigger event for gotHitFeedback
+	UFUNCTION(BlueprintImplementableEvent, Category = "FeedbackFunctions")
+		void diedFeedback(); // i am not sure whether the enemyType matters
+
+	// trigger event for gotHitFeedback
+	UFUNCTION(BlueprintImplementableEvent, Category = "GuardianHit")
+		void hitRice(); // i am not sure whether the enemyType matters
+	// trigger event for gotHitFeedback
+	UFUNCTION(BlueprintImplementableEvent, Category = "GuardianHit")
+		void hitToast(); // i am not sure whether the enemyType matters
+	// trigger event for gotHitFeedback
+	UFUNCTION(BlueprintImplementableEvent, Category = "GuardianHit")
+		void hitIce(); // i am not sure whether the enemyType matters
 
 
+	// Take calculated Damage and assign it to enemy
+	UFUNCTION(BlueprintCallable, Category = "Knife")
+		void spawnKnife(guardianTypeEnum guardianType);
+
+	// trigger event for gotHitFeedback
+	UFUNCTION(BlueprintImplementableEvent, Category = "Knife")
+		void spawnKnifeExecute(); // i am not sure whether the enemyType matters
 };
