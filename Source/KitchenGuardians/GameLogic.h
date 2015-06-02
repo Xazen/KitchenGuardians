@@ -52,7 +52,7 @@ public:
 
 	// Add a Score Value to the Current HighScore
 	UFUNCTION(BlueprintCallable, Category = "ScoringFunctions")
-		void AddScore(int32 addedScore);
+		void AddScore(int32 addedScore, enemyTypeEnum enemyType);
 
 	// calculate a Score depending on the Enemy - the Type of Attack - a Multiplier and a Bonus (last are just predicted optional values with default values)
 	//default values just working with int32 sorry :(

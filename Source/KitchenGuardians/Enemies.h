@@ -13,9 +13,9 @@
 UENUM(BlueprintType)		//"BlueprintType" is essential to include
 enum class enemyTypeEnum : uint8
 {
-	VE_Meat 	UMETA(DisplayName = "Meat"),
-	VE_Vegetable 	UMETA(DisplayName = "Vegetable"),
-	VE_Drink	UMETA(DisplayName = "Drink")
+	VE_Aubergine 	UMETA(DisplayName = "Aubergine"),
+	VE_Mushroom 	UMETA(DisplayName = "Mushroom"),
+	VE_Chili	UMETA(DisplayName = "Chili")
 };
 
 //test
