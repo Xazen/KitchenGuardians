@@ -10,25 +10,40 @@ AGameLogic::AGameLogic()
  	// Set this actor to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
 	PrimaryActorTick.bCanEverTick = true;
 	highScore = 0;
+	killCounterChillis = 0;
+	killCounterMushrooms = 0;
+	
 	spawnTimeDelta = 2.5f;
+	isGameover = false;
 }
 
-void AGameLogic::AddScore(uint32 addedScore)
+void AGameLogic::AddScore(int32 addedScore, enemyTypeEnum enemyType)
 {
 	highScore += addedScore;
+	switch (enemyType)
+	{
+	case enemyTypeEnum::VE_Aubergine:
+		killCounterOnions += 1;
+		break;
+
+	case enemyTypeEnum::VE_Chili:
+		killCounterChillis += 1;
+		break;
+
+	case enemyTypeEnum::VE_Mushroom:
+		killCounterMushrooms += 1;
+		break;
+	}
+
+
 }
 
 //unfinished
-uint32 AGameLogic::calculateScore(enemyTypeEnum enemyType, guardianTypeEnum guardianType, int32 multiplier, int32 bonus)
+int32 AGameLogic::calculateScore(enemyTypeEnum enemyType, guardianTypeEnum guardianType, int32 multiplier, int32 bonus)
 {
-	uint32 calculatedScore=0;
+	int32 calculatedScore=0;
 
 	//switch on enemy and guardiantype
-	if (enemyType == enemyTypeEnum::VE_Drink)
-	{
-		//do something...
-
-	}
 	calculatedScore = 1.0f *multiplier + bonus;
 
 	return calculatedScore;
@@ -41,6 +56,13 @@ float AGameLogic::newSpawnDeltaTime()
 	return newSpawnDelta;
 
 }
+
+void AGameLogic::gameOver()
+{
+	isGameover = true;
+	gameOverExecute();
+}
+
 
 // Called when the game starts or when spawned
 void AGameLogic::BeginPlay()

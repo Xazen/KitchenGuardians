@@ -8,20 +8,19 @@
 AEnemies::AEnemies()
 {
 	// Sets default values for this actor's properties
-	hitPoints = 0;
-	baseDamage = 0;
-	baseScore = 0;
-	jumpSpeed = 0;
+	hitPoints = 3;
+	baseScore = 100;
+	jumpSpeed = 1;
 	currentSpline = 0;
 	distPerc = 0.0f;
-	guardianHitCase = 0;
+	guardianHitCase = 1;
+
 }
 
 // Called when the game starts or when spawned
 void AEnemies::BeginPlay()
 {
 	Super::BeginPlay();
-	GotHit(0);
 }
 
 
@@ -35,7 +34,7 @@ void AEnemies::CalculateDistancePercentage(float deltaTime)
 {
 	float result;
 	float zDirector = splineList[currentSpline]->GetWorldDirectionAtDistanceAlongSpline(splineList[currentSpline]->GetSplineLength() * distPerc).Z;
-	result = (((abs(cos(zDirector)) * 0.5f) + ((distPerc * 0.3f) + 0.02f) * deltaTime) + distPerc);
+	result = ((((abs(cos(zDirector)) * 0.5f) + ((distPerc * 0.3f) + 0.02f)) * deltaTime) + distPerc);
 	distPerc = result;
 }
 
@@ -53,13 +52,13 @@ void AEnemies::CheckDistancePercentage()
 			switch (guardianHitCase)
 			{
 				case 1:
-					//guardianOne->GotHit();
+					hitRice();
+				break;
+				case 2:
+					hitToast();
 					break;
-				case 2: 
-					//guardianTwo->GotHit();
-					break;
-				case 3: 
-					//guardianThree->GotHit();
+				case 3:
+					hitIce();
 					break;
 			}
 			Destroy();
@@ -67,31 +66,50 @@ void AEnemies::CheckDistancePercentage()
 	}
 }
 
-void AEnemies::GotHit(uint8 calculatedDamage)
+void AEnemies::spawnKnife(guardianTypeEnum guardianType)
 {
+
+	switch (guardianType)
+	{
+	case guardianTypeEnum::VE_Toaster:
+		knifeSpawn = guardianToast->GetTransform();
+		guardianToast->Shot(-1);
+		break;
+	case guardianTypeEnum::VE_Ice:
+		knifeSpawn = guardianIce->GetTransform();
+		guardianIce->Shot(-1);
+		break;
+	}
+	spawnKnifeExecute();
+}
+
+void AEnemies::GotHit(guardianTypeEnum guardianType)
+{
+	int32 calculatedDamage;
+	switch (guardianType)
+	{
+	case guardianTypeEnum::VE_Toaster:
+		calculatedDamage = 9;
+		break;
+	case guardianTypeEnum::VE_Rice:
+		calculatedDamage = 1;
+		break;
+	case guardianTypeEnum::VE_Ice:
+		calculatedDamage = 1;
+		break;
+	}
+
 	hitPoints -= calculatedDamage;
-	UParticleSystem *emitterTemplate = nullptr; //unsicher: parameterübergabe?
 	if (hitPoints <= 0)
 	{
-		DiedEffect(emitterTemplate); //unsicher: parameter?
-
-		// riceBot->Scorred(baseScore);
-		Destroy();
+		diedFeedback();
 	}
 	else
 	{
-		GotHitEffect(emitterTemplate); //unsicher: parameter?
+		GotHitFeedback();
 	}
+
 }
 
-void AEnemies::GotHitEffect(UParticleSystem *emitterTemplate)
-{
-	UGameplayStatics::SpawnEmitterAtLocation(this, emitterTemplate, GetActorLocation(), FRotator::ZeroRotator, true);
-		// riceBot->PlaySoundAtLocation()
-}
 
-void AEnemies::DiedEffect(UParticleSystem *emitterTemplate)
-{
-	UGameplayStatics::SpawnEmitterAtLocation(this, emitterTemplate, GetActorLocation(), FRotator::ZeroRotator, true);
-	// riceBot->PlaySoundAtLocation()
-}
+

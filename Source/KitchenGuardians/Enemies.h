@@ -5,6 +5,7 @@
 #include "GameFramework/Actor.h"
 #include "Classes/Components/SplineComponent.h"
 #include "Classes/Particles/ParticleSystem.h"
+#include "Guardian.h"
 
 #include "Enemies.generated.h"
 
@@ -12,9 +13,9 @@
 UENUM(BlueprintType)		//"BlueprintType" is essential to include
 enum class enemyTypeEnum : uint8
 {
-	VE_Meat 	UMETA(DisplayName = "Meat"),
-	VE_Vegetable 	UMETA(DisplayName = "Vegetable"),
-	VE_Drink	UMETA(DisplayName = "Drink")
+	VE_Aubergine 	UMETA(DisplayName = "Aubergine"),
+	VE_Mushroom 	UMETA(DisplayName = "Mushroom"),
+	VE_Chili	UMETA(DisplayName = "Chili")
 };
 
 
@@ -38,47 +39,49 @@ public:
 
 	// Hitpoints of Enemy
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "EnemyProps")
-	int8 hitPoints;
+	int32 hitPoints;
 
-	// Damage of Enemy
+	// Score the player gets for killing this enemy
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "EnemyProps")
-	uint8 baseDamage;
+	int32 baseScore;
 
-	// Score of Enemy
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "EnemyProps")
-	uint8 baseScore;
-
-	// Speed of Enemy
+	// Speed of Enemy - not used by now
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "EnemyProps")
 	float jumpSpeed;
 
-	// Spline Component List
+	// Spline Component List - where the enemy will move along
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "EnemyProps")
 	TArray<USplineComponent*> splineList;
 
-	// index of Current Spline
+	// index of Current Spline the enemy is moving on
 	UPROPERTY(BlueprintReadWrite, Category = "EnemyProps")
-	uint8 currentSpline;
+	int32 currentSpline;
 	
 	// Distance Percentage the enemy is located on the current Spline
 	UPROPERTY(BlueprintReadWrite, Category = "EnemyProps")
 	float distPerc;
 
+	// the point where the knifes spawn (i.e. the toaster or ice dispenser)
+	UPROPERTY(BlueprintReadWrite, Category = "EnemyProps")
+		FTransform knifeSpawn;
+
 	// Which Guardian this Enemy will be reducing hitpoints when reaching the end of its path
 	UPROPERTY(BlueprintReadWrite, Category = "EnemyProps")
-	uint8 guardianHitCase;
+		int32 guardianHitCase;
+		//guardianTypeEnum guardianHitCase could also be used;
 
-	// Guardian 1 Reference
+	// Guardian Rice Reference
 	UPROPERTY(BlueprintReadWrite, Category = "EnemyProps")
-	AActor *guardianOne;
+	AGuardian *guardianRice;
 
-	// Guardian 2 Reference
+	// Guardian Toast Reference
 	UPROPERTY(BlueprintReadWrite, Category = "EnemyProps")
-	AActor *guardianTwo;
+	AGuardian *guardianToast;
 
-	// Guardian 3 Reference
+	// Guardian Ice Reference
 	UPROPERTY(BlueprintReadWrite, Category = "EnemyProps")
-	AActor *guardianThree;
+	AGuardian *guardianIce;
+
 
 	///
 	///	UFUNCTIONS
@@ -89,28 +92,49 @@ public:
 
 
 	// MoveEnemyAlongSpline
-	UFUNCTION(BlueprintCallable, Category = "EnemyFunctions")
+	UFUNCTION(BlueprintCallable, Category = "MovementFunctions")
 	void MoveEnemyAlongSpline();
 
 	// Calculate the new Distance Percentage for moving the Enemy along its current Spline
-	UFUNCTION(BlueprintCallable, Category = "EnemyFunctions")
+	UFUNCTION(BlueprintCallable, Category = "MovementFunctions")
 	void CalculateDistancePercentage(float deltaTime);
 
 	// Check whether an Enemy reached the End of this or all Splines
-	UFUNCTION(BlueprintCallable, Category = "EnemyFunctions")
+	UFUNCTION(BlueprintCallable, Category = "MovementFunctions")
 	void CheckDistancePercentage();
 
+	// spawns the knife projectile that is shot towards this enemy
+	UFUNCTION(BlueprintCallable, Category = "ReceiveDmgFunctions")
+		void spawnKnife(guardianTypeEnum guardianType);
+
+	// execute the projectile shot
+	UFUNCTION(BlueprintImplementableEvent, Category = "ReceiveDmgFunctions")
+		void spawnKnifeExecute();
+
 	// Take calculated Damage and assign it to enemy
-	UFUNCTION(BlueprintCallable, Category = "EnemyFunctions")
-	void GotHit(uint8 calculatedDamage);
+	UFUNCTION(BlueprintCallable, Category = "ReceiveDmgFunctions")
+		void GotHit(guardianTypeEnum guardianType);
 
 	// plays all the Effects(particles, sounds, giblets...) when an Enemy got hit by an projectile  - but has remaining hitpoints
-	UFUNCTION(BlueprintCallable, Category = "EnemyFunctions")
-	void GotHitEffect(UParticleSystem *emitterTemplate);
+	UFUNCTION(BlueprintImplementableEvent, Category = "ReceiveDmgFunctions")
+		void GotHitFeedback();
 
 	// plays all the Effects when an Enemy dies (particles, sounds, giblets...)
-	UFUNCTION(BlueprintCallable, Category = "EnemyFunctions")
-	void DiedEffect(UParticleSystem *emitterTemplate);
+	UFUNCTION(BlueprintImplementableEvent, Category = "ReceiveDmgFunctions")
+		void diedFeedback(); 
+
+	// trigger event when guardian rice gets hit 
+	UFUNCTION(BlueprintImplementableEvent, Category = "SendDmgFunctions")
+		void hitRice();
+
+	// trigger event when guardian toast gets hit 
+	UFUNCTION(BlueprintImplementableEvent, Category = "SendDmgFunctions")
+		void hitToast(); 
+
+	// trigger event when guardian ice gets hit 
+	UFUNCTION(BlueprintImplementableEvent, Category = "SendDmgFunctions")
+		void hitIce(); 
+
 
 
 };
