@@ -16,6 +16,7 @@ AEnemies::AEnemies()
 	guardianHitCase = 1;
 	idleTime = 0.5f;
 	isWalking = false;
+	
 }
 
 // Called when the game starts or when spawned
@@ -29,8 +30,29 @@ void AEnemies::MoveEnemyAlongSpline()
 {
 	if (!isIdle)
 	{
-		FVector newLocation = splineList[currentSpline]->GetWorldLocationAtDistanceAlongSpline(splineList[currentSpline]->GetSplineLength() * distPerc);
-		SetActorLocation(newLocation, false);
+		if (!isWalking)
+		{
+			FVector newLocation = splineList[currentSpline]->GetWorldLocationAtDistanceAlongSpline(splineList[currentSpline]->GetSplineLength() * distPerc);
+			SetActorLocation(newLocation, false);
+			switch (enemyMoveType)
+			{
+			case EnemyMoveTypeEnum::Standard:
+
+				break;
+			case EnemyMoveTypeEnum::Tank:
+
+				break;
+			case EnemyMoveTypeEnum::Fast:
+
+				break;
+			}
+		}
+		else
+		{
+			FVector newLocation = splineList[currentSpline]->GetWorldLocationAtDistanceAlongSpline(splineList[currentSpline]->GetSplineLength() * distPerc);
+			SetActorLocation(newLocation, false);
+		}
+
 	}
 
 }
@@ -69,6 +91,7 @@ void AEnemies::CheckDistancePercentage()
 				{
 					distPerc = 0.0f;
 					currentSpline++;
+					isWalking = walkingList[currentSpline];
 					isIdle = false;
 				}
 
@@ -90,6 +113,21 @@ void AEnemies::CheckDistancePercentage()
 					hitIce();
 					break;
 			}
+			switch (guardianHitCaseEnum)
+			{
+			case GuardianTypeEnum::Rice:
+
+				break;
+			case GuardianTypeEnum::Ice:
+
+				break;
+
+			case GuardianTypeEnum::Toaster:
+
+				break;
+
+			}
+
 			Destroy();
 		}
 	}
@@ -114,7 +152,7 @@ void AEnemies::spawnKnife(GuardianTypeEnum guardianType)
 
 void AEnemies::GotHit(GuardianTypeEnum guardianType)
 {
-	int32 calculatedDamage;
+	int32 calculatedDamage=0;
 	switch (guardianType)
 	{
 	case GuardianTypeEnum::Toaster:

@@ -60,9 +60,14 @@ public:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Movement")
 	TArray<USplineComponent*> splineList;
 
+	//type of Enemy
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Movement")
+	EnemyMoveTypeEnum enemyMoveType;
+
 	// Spline Component List - where the enemy will move along
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Movement")
-		TArray<bool> walkingList;
+	TArray<bool> walkingList;
+
 	// index of Current Spline the enemy is moving on
 	UPROPERTY(BlueprintReadWrite, Category = "Movement")
 	int32 currentSpline;
@@ -95,6 +100,11 @@ public:
 	UPROPERTY(BlueprintReadWrite, Category = "EnemyProps")
 		int32 guardianHitCase;
 		//guardianTypeEnum guardianHitCase could also be used;
+
+	// Which Guardian this Enemy will be reducing hitpoints when reaching the end of its path
+	UPROPERTY(BlueprintReadWrite, Category = "EnemyProps")
+		GuardianTypeEnum guardianHitCaseEnum;
+	//guardianTypeEnum guardianHitCase could also be used;
 
 	// Guardian Rice Reference
 	UPROPERTY(BlueprintReadWrite, Category = "EnemyProps")
