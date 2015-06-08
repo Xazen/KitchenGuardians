@@ -57,27 +57,31 @@ public:
 	float jumpSpeed;
 
 	// Spline Component List - where the enemy will move along
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "EnemyProps")
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Movement")
 	TArray<USplineComponent*> splineList;
 
 	// index of Current Spline the enemy is moving on
-	UPROPERTY(BlueprintReadWrite, Category = "EnemyProps")
+	UPROPERTY(BlueprintReadWrite, Category = "Movement")
 	int32 currentSpline;
 	
 	// Distance Percentage the enemy is located on the current Spline
-	UPROPERTY(BlueprintReadWrite, Category = "EnemyProps")
+	UPROPERTY(BlueprintReadWrite, Category = "Movement")
 	float distPerc;
 
 	// Distance Percentage the enemy is located on the current Spline
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "EnemyProps")
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Movement")
 	bool isIdle;
 
 	// Distance Percentage the enemy is located on the current Spline
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "EnemyProps")
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Movement")
+	bool isWalking;
+
+	// Distance Percentage the enemy is located on the current Spline
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Movement")
 	float idleTime;
 	
 	// Distance Percentage the enemy is located on the current Spline
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "EnemyProps")
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Movement")
 		float idleCurrentTime;
 
 	// the point where the knifes spawn (i.e. the toaster or ice dispenser)

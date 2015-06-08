@@ -15,6 +15,7 @@ AEnemies::AEnemies()
 	distPerc = 0.0f;
 	guardianHitCase = 1;
 	idleTime = 0.5f;
+	isWalking = false;
 }
 
 // Called when the game starts or when spawned
