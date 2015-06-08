@@ -91,7 +91,7 @@ void AEnemies::CheckDistancePercentage()
 				{
 					distPerc = 0.0f;
 					currentSpline++;
-					isWalking = walkingList[currentSpline];
+					//isWalking = walkingList[currentSpline];
 					isIdle = false;
 				}
 
