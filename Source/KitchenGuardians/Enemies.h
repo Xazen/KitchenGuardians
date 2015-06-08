@@ -107,15 +107,15 @@ public:
 	//guardianTypeEnum guardianHitCase could also be used;
 
 	// Guardian Rice Reference
-	UPROPERTY(BlueprintReadWrite, Category = "EnemyProps")
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "EnemyProps")
 	AGuardian *guardianRice;
 
 	// Guardian Toast Reference
-	UPROPERTY(BlueprintReadWrite, Category = "EnemyProps")
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "EnemyProps")
 	AGuardian *guardianToast;
 
 	// Guardian Ice Reference
-	UPROPERTY(BlueprintReadWrite, Category = "EnemyProps")
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "EnemyProps")
 	AGuardian *guardianIce;
 
 
