@@ -17,20 +17,20 @@ AGameLogic::AGameLogic()
 	isGameover = false;
 }
 
-void AGameLogic::AddScore(int32 addedScore, enemyTypeEnum enemyType)
+void AGameLogic::AddScore(int32 addedScore, EnemyTypeEnum enemyType)
 {
 	highScore += addedScore;
 	switch (enemyType)
 	{
-	case enemyTypeEnum::VE_Aubergine:
+	case EnemyTypeEnum::Aubergine:
 		killCounterOnions += 1;
 		break;
 
-	case enemyTypeEnum::VE_Chili:
+	case EnemyTypeEnum::Chili:
 		killCounterChillis += 1;
 		break;
 
-	case enemyTypeEnum::VE_Mushroom:
+	case EnemyTypeEnum::Mushroom:
 		killCounterMushrooms += 1;
 		break;
 	}
@@ -39,7 +39,7 @@ void AGameLogic::AddScore(int32 addedScore, enemyTypeEnum enemyType)
 }
 
 //unfinished
-int32 AGameLogic::calculateScore(enemyTypeEnum enemyType, guardianTypeEnum guardianType, int32 multiplier, int32 bonus)
+int32 AGameLogic::calculateScore(EnemyTypeEnum enemyType, GuardianTypeEnum guardianType, int32 multiplier, int32 bonus)
 {
 	int32 calculatedScore=0;
 

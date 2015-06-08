@@ -11,15 +11,15 @@
 
 
 UENUM(BlueprintType)		//"BlueprintType" is essential to include
-enum class enemyTypeEnum : uint8
+enum class EnemyTypeEnum : uint8
 {
-	VE_Aubergine 	UMETA(DisplayName = "Aubergine"),
-	VE_Mushroom 	UMETA(DisplayName = "Mushroom"),
-	VE_Chili	UMETA(DisplayName = "Chili")
+	Aubergine 	UMETA(DisplayName = "Aubergine"),
+	Mushroom 	UMETA(DisplayName = "Mushroom"),
+	Chili	UMETA(DisplayName = "Chili")
 };
 
 UENUM(BlueprintType)		//"BlueprintType" is essential to include
-enum class enemyMoveTypeEnum : uint8
+enum class EnemyMoveTypeEnum : uint8
 {
 	Standard 	UMETA(DisplayName = "Standard"),
 	Tank 	UMETA(DisplayName = "Tank"),
@@ -41,7 +41,7 @@ public:
 
 	//type of Enemy
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "EnemyProps")
-	enemyTypeEnum enemyType;
+	EnemyTypeEnum enemyType;
 
 
 	// Hitpoints of Enemy
@@ -124,7 +124,7 @@ public:
 
 	// spawns the knife projectile that is shot towards this enemy
 	UFUNCTION(BlueprintCallable, Category = "ReceiveDmgFunctions")
-		void spawnKnife(guardianTypeEnum guardianType);
+		void spawnKnife(GuardianTypeEnum guardianType);
 
 	// execute the projectile shot
 	UFUNCTION(BlueprintImplementableEvent, Category = "ReceiveDmgFunctions")
@@ -132,7 +132,7 @@ public:
 
 	// Take calculated Damage and assign it to enemy
 	UFUNCTION(BlueprintCallable, Category = "ReceiveDmgFunctions")
-		void GotHit(guardianTypeEnum guardianType);
+		void GotHit(GuardianTypeEnum guardianType);
 
 	// plays all the Effects(particles, sounds, giblets...) when an Enemy got hit by an projectile  - but has remaining hitpoints
 	UFUNCTION(BlueprintImplementableEvent, Category = "ReceiveDmgFunctions")

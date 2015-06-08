@@ -76,16 +76,16 @@ void AEnemies::CheckDistancePercentage()
 	}
 }
 
-void AEnemies::spawnKnife(guardianTypeEnum guardianType)
+void AEnemies::spawnKnife(GuardianTypeEnum guardianType)
 {
 
 	switch (guardianType)
 	{
-	case guardianTypeEnum::VE_Toaster:
+	case GuardianTypeEnum::Toaster:
 		knifeSpawn = guardianToast->GetTransform();
 		guardianToast->Shot(-1);
 		break;
-	case guardianTypeEnum::VE_Ice:
+	case GuardianTypeEnum::Ice:
 		knifeSpawn = guardianIce->GetTransform();
 		guardianIce->Shot(-1);
 		break;
@@ -93,18 +93,18 @@ void AEnemies::spawnKnife(guardianTypeEnum guardianType)
 	spawnKnifeExecute();
 }
 
-void AEnemies::GotHit(guardianTypeEnum guardianType)
+void AEnemies::GotHit(GuardianTypeEnum guardianType)
 {
 	int32 calculatedDamage;
 	switch (guardianType)
 	{
-	case guardianTypeEnum::VE_Toaster:
+	case GuardianTypeEnum::Toaster:
 		calculatedDamage = 9;
 		break;
-	case guardianTypeEnum::VE_Rice:
+	case GuardianTypeEnum::Rice:
 		calculatedDamage = 1;
 		break;
-	case guardianTypeEnum::VE_Ice:
+	case GuardianTypeEnum::Ice:
 		calculatedDamage = 1;
 		break;
 	}

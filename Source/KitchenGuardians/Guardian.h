@@ -8,11 +8,11 @@
 
 
 UENUM(BlueprintType)		//"BlueprintType" is essential to include
-enum class guardianTypeEnum : uint8
+enum class GuardianTypeEnum : uint8
 {
-	VE_Toaster 	UMETA(DisplayName = "Toaster"),
-	VE_Rice 	UMETA(DisplayName = "Rice"),
-	VE_Ice	UMETA(DisplayName = "Ice")
+	Toaster 	UMETA(DisplayName = "Toaster"),
+	Rice 	UMETA(DisplayName = "Rice"),
+	Ice	UMETA(DisplayName = "Ice")
 };
 
 
@@ -35,7 +35,7 @@ public:
 
 	//type of Guardian
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "GuardianProps")
-		guardianTypeEnum guardianType;
+		GuardianTypeEnum guardianType;
 	
 
 	// whether this Guardian is currently active or not - need to figure something out for always on or select guardian mode
