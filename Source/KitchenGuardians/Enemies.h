@@ -38,7 +38,7 @@ public:
 	///
 	///	UPROPERTYS
 	///
-
+	//bla
 	//type of Enemy
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "EnemyProps")
 	EnemyTypeEnum enemyType;
