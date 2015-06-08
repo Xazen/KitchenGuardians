@@ -46,6 +46,16 @@ void AEnemies::CheckDistancePercentage()
 		{
 			distPerc = 0.0f;
 			currentSpline++;
+			if (!isIdle)
+			{
+
+			}
+			if (isIdle)
+			{
+
+
+			}
+
 		}
 		else
 		{

@@ -18,6 +18,13 @@ enum class enemyTypeEnum : uint8
 	VE_Chili	UMETA(DisplayName = "Chili")
 };
 
+UENUM(BlueprintType)		//"BlueprintType" is essential to include
+enum class enemyMoveTypeEnum : uint8
+{
+	Standard 	UMETA(DisplayName = "Standard"),
+	Tank 	UMETA(DisplayName = "Tank"),
+	Fast	UMETA(DisplayName = "Fast")
+};
 
 UCLASS()
 class KITCHENGUARDIANS_API AEnemies : public AActor
@@ -34,7 +41,7 @@ public:
 
 	//type of Enemy
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "EnemyProps")
-		enemyTypeEnum enemyType;
+	enemyTypeEnum enemyType;
 
 
 	// Hitpoints of Enemy
@@ -60,6 +67,18 @@ public:
 	// Distance Percentage the enemy is located on the current Spline
 	UPROPERTY(BlueprintReadWrite, Category = "EnemyProps")
 	float distPerc;
+
+	// Distance Percentage the enemy is located on the current Spline
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "EnemyProps")
+	bool isIdle;
+
+	// Distance Percentage the enemy is located on the current Spline
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "EnemyProps")
+	float idleTime;
+	
+	// Distance Percentage the enemy is located on the current Spline
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "EnemyProps")
+		float idleCurrentTime;
 
 	// the point where the knifes spawn (i.e. the toaster or ice dispenser)
 	UPROPERTY(BlueprintReadWrite, Category = "EnemyProps")
