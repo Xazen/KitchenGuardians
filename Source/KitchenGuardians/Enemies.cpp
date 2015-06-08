@@ -14,7 +14,7 @@ AEnemies::AEnemies()
 	currentSpline = 0;
 	distPerc = 0.0f;
 	guardianHitCase = 1;
-
+	idleTime = 0.5f;
 }
 
 // Called when the game starts or when spawned
@@ -26,16 +26,28 @@ void AEnemies::BeginPlay()
 
 void AEnemies::MoveEnemyAlongSpline()
 {
-	FVector newLocation = splineList[currentSpline]->GetWorldLocationAtDistanceAlongSpline(splineList[currentSpline]->GetSplineLength() * distPerc);
-	SetActorLocation(newLocation, false);
+	if (!isIdle)
+	{
+		FVector newLocation = splineList[currentSpline]->GetWorldLocationAtDistanceAlongSpline(splineList[currentSpline]->GetSplineLength() * distPerc);
+		SetActorLocation(newLocation, false);
+	}
+
 }
 
 void AEnemies::CalculateDistancePercentage(float deltaTime)
 {
-	float result;
-	float zDirector = splineList[currentSpline]->GetWorldDirectionAtDistanceAlongSpline(splineList[currentSpline]->GetSplineLength() * distPerc).Z;
-	result = ((((abs(cos(zDirector)) * 0.5f) + ((distPerc * 0.3f) + 0.02f)) * deltaTime) + distPerc);
-	distPerc = result;
+	if (!isIdle)
+	{
+		float result;
+		float zDirector = splineList[currentSpline]->GetWorldDirectionAtDistanceAlongSpline(splineList[currentSpline]->GetSplineLength() * distPerc).Z;
+		result = ((((abs(cos(zDirector)) * 0.5f) + ((distPerc * 0.3f) + 0.02f)) * deltaTime) + distPerc);
+		distPerc = result;
+	}
+	else
+	{
+		idleCurrentTime += deltaTime;
+	}
+
 }
 
 void AEnemies::CheckDistancePercentage()
@@ -44,15 +56,19 @@ void AEnemies::CheckDistancePercentage()
 	{
 		if (currentSpline < (splineList.Num() - 1))
 		{
-			distPerc = 0.0f;
-			currentSpline++;
 			if (!isIdle)
 			{
-
+				isIdle = true;
+				idleCurrentTime = 0;
 			}
 			if (isIdle)
 			{
-
+				if (idleCurrentTime >= idleTime)
+				{
+					distPerc = 0.0f;
+					currentSpline++;
+					isIdle = false;
+				}
 
 			}
 
