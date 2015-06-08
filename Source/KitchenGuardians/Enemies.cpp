@@ -57,8 +57,7 @@ void AEnemies::CheckDistancePercentage()
 	{
 		if (currentSpline < (splineList.Num() - 1))
 		{
-			distPerc = 0.0f;
-			currentSpline++;
+
 			if (!isIdle)
 			{
 				isIdle = true;
