@@ -63,7 +63,8 @@ void AEnemies::CalculateDistancePercentage(float deltaTime)
 	{
 		float result;
 		float zDirector = splineList[currentSpline]->GetWorldDirectionAtDistanceAlongSpline(splineList[currentSpline]->GetSplineLength() * distPerc).Z;
-		result = ((((abs(cos(zDirector)) * 0.5f) + ((distPerc * 0.3f) + 0.02f)) * deltaTime) + distPerc);
+		float adjustedTime = deltaTime*speed; 
+		result = ((sin(abs(zDirector)) * 0.45f * adjustedTime) + (0.5f * adjustedTime) + distPerc);
 		distPerc = result;
 	}
 	else
