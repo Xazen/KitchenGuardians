@@ -52,9 +52,21 @@ public:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "EnemyProps")
 	int32 baseScore;
 
-	// Speed of Enemy - not used by now
+	// overall Speed-Factor of Enemy that defines how fast he is moving - intended to be used for different difficulties
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Movement")
-	float speed;
+	float speedFactor;
+
+	// Speed-Factor that defines how fast he is jumping - intended to be used to set up general movement
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Movement")
+	float baseSpeedJump;
+
+	// Linear Interpolation between constant forward movement (0) and speed depending on how steep the spline is (1)
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Movement")
+		float jumpLerp;
+
+	// Speed-Factor that defines how fast he is walking - intended to be used to set up general movement
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Movement")
+	float baseSpeedWalk;
 
 	// Spline Component List - where the enemy will move along
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Movement")
@@ -64,7 +76,7 @@ public:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Movement")
 	EnemyMoveTypeEnum enemyMoveType;
 
-	// Spline Component List - where the enemy will move along
+	// Spline Component List - where the enemy will walk along
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Movement")
 	TArray<bool> walkingList;
 

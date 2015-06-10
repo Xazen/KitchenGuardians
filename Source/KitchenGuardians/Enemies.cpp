@@ -10,13 +10,15 @@ AEnemies::AEnemies()
 	// Sets default values for this actor's properties
 	hitPoints = 3;
 	baseScore = 100;
-	speed = 1;
+	speedFactor = 1;
 	currentSpline = 0;
 	distPerc = 0.0f;
 	guardianHitCase = 1;
 	idleTime = 0.5f;
 	isWalking = false;
-	
+	jumpLerp = 0.45f;
+	baseSpeedJump = 1.0f;
+	baseSpeedWalk = 1.0f;
 }
 
 // Called when the game starts or when spawned
@@ -63,8 +65,17 @@ void AEnemies::CalculateDistancePercentage(float deltaTime)
 	{
 		float result;
 		float zDirector = splineList[currentSpline]->GetWorldDirectionAtDistanceAlongSpline(splineList[currentSpline]->GetSplineLength() * distPerc).Z;
-		float adjustedTime = deltaTime*speed; 
-		result = ((sin(abs(zDirector)) * 0.45f * adjustedTime) + (0.5f * adjustedTime) + distPerc);
+		if (!isWalking)
+		{
+			float adjustedTime = deltaTime*speedFactor*baseSpeedJump;
+			result = FMath::Lerp(adjustedTime, (sin(abs(zDirector)) * adjustedTime), jumpLerp) + distPerc;
+		}
+		else
+		{
+			float adjustedTime = deltaTime*speedFactor*baseSpeedWalk;
+			result = adjustedTime + distPerc;
+		}
+
 		distPerc = result;
 	}
 	else
