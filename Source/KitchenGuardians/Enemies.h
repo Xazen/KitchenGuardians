@@ -68,6 +68,10 @@ public:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Movement")
 	float baseSpeedWalk;
 
+	// How fast the enemy rotates towards the new jumpdirection between jumps, while idling
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Movement")
+		float rotationLerpSpeed;
+	
 	// Spline Component List - where the enemy will move along
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Movement")
 	TArray<USplineComponent*> splineList;
@@ -142,6 +146,10 @@ public:
 	// MoveEnemyAlongSpline
 	UFUNCTION(BlueprintCallable, Category = "MovementFunctions")
 	void MoveEnemyAlongSpline();
+
+	// Rotate the enemy towards the jumpdirection
+	UFUNCTION(BlueprintCallable, Category = "MovementFunctions")
+		void Rotate(float deltaTime);
 
 	// Calculate the new Distance Percentage for moving the Enemy along its current Spline
 	UFUNCTION(BlueprintCallable, Category = "MovementFunctions")

@@ -19,6 +19,7 @@ AEnemies::AEnemies()
 	jumpLerp = 0.45f;
 	baseSpeedJump = 1.0f;
 	baseSpeedWalk = 1.0f;
+	rotationLerpSpeed = 7.5f;
 }
 
 // Called when the game starts or when spawned
@@ -57,6 +58,25 @@ void AEnemies::MoveEnemyAlongSpline()
 
 	}
 
+}
+
+void AEnemies::Rotate(float deltaTime)
+{
+	if (isIdle)
+	{
+		FRotator enemyRot = GetActorRotation();
+		FRotator targetRot = splineList[currentSpline+1]->GetWorldRotationAtDistanceAlongSpline(0.0f);
+		float rotation = FMath::LerpStable(enemyRot.Yaw, targetRot.Yaw, deltaTime*rotationLerpSpeed); 
+		FRotator newRot = FRotator(enemyRot.Pitch, rotation, enemyRot.Roll);
+		SetActorRotation(newRot);
+	}
+	else
+	{
+		FRotator enemyRot = GetActorRotation();
+		FRotator targetRot = splineList[currentSpline]->GetWorldRotationAtDistanceAlongSpline(splineList[currentSpline]->GetSplineLength() * distPerc);
+		FRotator newRot = FRotator(enemyRot.Pitch, targetRot.Yaw, enemyRot.Roll);
+		SetActorRotation(newRot);
+	}
 }
 
 void AEnemies::CalculateDistancePercentage(float deltaTime)
