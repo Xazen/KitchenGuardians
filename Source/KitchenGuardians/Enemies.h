@@ -157,7 +157,7 @@ public:
 
 	// Check whether an Enemy reached the End of this or all Splines
 	UFUNCTION(BlueprintCallable, Category = "MovementFunctions")
-	void CheckDistancePercentage();
+	bool CheckDistancePercentage();
 
 	// spawns the knife projectile that is shot towards this enemy
 	UFUNCTION(BlueprintCallable, Category = "ReceiveDmgFunctions")

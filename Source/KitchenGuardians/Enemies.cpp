@@ -104,8 +104,8 @@ void AEnemies::CalculateDistancePercentage(float deltaTime)
 	}
 
 }
-
-void AEnemies::CheckDistancePercentage()
+//return true if enemy has reached its goal
+bool AEnemies::CheckDistancePercentage()
 {
 	if (distPerc >= 1.0f)
 	{
@@ -129,7 +129,7 @@ void AEnemies::CheckDistancePercentage()
 
 
 			}
-
+			return false;
 		}
 		else
 		{
@@ -159,10 +159,11 @@ void AEnemies::CheckDistancePercentage()
 				break;
 
 			}
-
+			return true;
 			Destroy();
 		}
 	}
+	return false;
 }
 
 void AEnemies::spawnKnife(GuardianTypeEnum guardianType)
