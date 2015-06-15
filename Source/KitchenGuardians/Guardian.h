@@ -55,6 +55,9 @@ public:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Ammunition")
 		float projectilesCurrent; //float because of possible "over time" or "swipe length" depletion
 
+	// whether this Guardian is currently in a reload process
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Ammunition")
+		bool isReloading;
 
 	// time in seconds it takes to gain one projectile -not really used for now
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Ammunition")

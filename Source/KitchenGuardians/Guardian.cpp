@@ -26,7 +26,7 @@ AGuardian::AGuardian()
 	isDead = false;
 	doFlash = false;
 	projectilesRefillTime = 3.0f;
-
+	isReloading = false;
 }
 
 // Called when the game starts or when spawned
@@ -116,9 +116,10 @@ bool AGuardian::canShoot()
 		return false;
 	if (hitpoints == 0)
 		return false;
+	if (isReloading)
+		return false;
 	if (projectilesCurrent == 0)
 		return false;
-
 	return true;
 
 }
