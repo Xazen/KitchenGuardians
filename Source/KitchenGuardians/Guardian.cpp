@@ -25,8 +25,10 @@ AGuardian::AGuardian()
 	reviveIsActive = false;
 	isDead = false;
 	doFlash = false;
-	projectilesRefillTime = 3.0f;
 	isReloading = false;
+	reloadTime = 2.0f;
+	reloadTimeCurrent = 0.0f;
+
 }
 
 // Called when the game starts or when spawned
@@ -123,6 +125,37 @@ bool AGuardian::canShoot()
 	return true;
 
 }
+
+void AGuardian::reloadAmmo(float deltaSeconds)
+{
+	if (isReloading)
+	{
+		reloadTimeCurrent += deltaSeconds;
+		projectilesCurrent = reloadTimeCurrent;
+		if (reloadTimeCurrent >= reloadTime)
+		{
+			isReloading = false;
+			projectilesMaximum = reloadTmpAmmoStore;
+			projectilesCurrent = projectilesMaximum;
+		}
+
+	}
+	else{
+		if (projectilesCurrent == 0)
+		{
+			initReload();
+		}
+	}
+}
+
+void AGuardian::initReload()
+{
+	isReloading = true;
+	reloadTmpAmmoStore = projectilesMaximum;
+	projectilesMaximum = reloadTime;
+	reloadTimeCurrent = 0.0f;
+}
+
 
 void AGuardian::addProjectile()
 {

@@ -59,9 +59,17 @@ public:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Ammunition")
 		bool isReloading;
 
-	// time in seconds it takes to gain one projectile -not really used for now
+	// time in seconds the reload process takes
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Ammunition")
-		float projectilesRefillTime; //float because of possible "over time" or "swipe length" depletion
+		float reloadTime;
+
+	// time the Current Reload process has past
+	UPROPERTY(BlueprintReadWrite, Category = "Ammunition")
+		float reloadTimeCurrent;
+
+	// temporarily stores the maximum amount of projectiles - because the maximum projectiles are used to display reload progress
+	UPROPERTY(BlueprintReadWrite, Category = "Ammunition")
+		float reloadTmpAmmoStore;
 
 	// amount of maximum Taps necessary to Revive the Guardian, i.e. the target value
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Revive Mechanic")
@@ -159,6 +167,14 @@ public:
 		// Whether this guardian can shoot or not (depending on ammunition and hitpoints and active-status)
 	UFUNCTION(BlueprintCallable, Category = "AmmunitionFunctions")
 		bool canShoot();
+
+	// this function executes manual reload, auto reload when empty and handles the time the reload takes
+	UFUNCTION(BlueprintCallable, Category = "AmmunitionFunctions")
+		void reloadAmmo(float deltaSeconds);
+
+	// this function executes manual reload, auto reload when empty and handles the time the reload takes
+	UFUNCTION(BlueprintCallable, Category = "AmmunitionFunctions")
+		void initReload();
 
 	// will add +1 projectile
 	UFUNCTION(BlueprintCallable, Category = "AmmunitionFunctions")
