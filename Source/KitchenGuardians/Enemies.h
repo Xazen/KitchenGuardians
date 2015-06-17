@@ -48,6 +48,11 @@ public:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "EnemyProps")
 	int32 hitPoints;
 
+	// whether the player can damage the enemy or will receive damage when attacking it - only used for chily by now
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "EnemyProps")
+	bool isEnemyVulnerable; //default value is true
+
+
 	// Score the player gets for killing this enemy
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "EnemyProps")
 	int32 baseScore;

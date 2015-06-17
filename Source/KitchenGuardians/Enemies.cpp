@@ -20,6 +20,7 @@ AEnemies::AEnemies()
 	baseSpeedJump = 1.0f;
 	baseSpeedWalk = 1.0f;
 	rotationLerpSpeed = 7.5f;
+	isEnemyVulnerable = true;
 }
 
 // Called when the game starts or when spawned
@@ -66,7 +67,12 @@ void AEnemies::Rotate(float deltaTime)
 	{
 		FRotator enemyRot = GetActorRotation();
 		FRotator targetRot = splineList[currentSpline+1]->GetWorldRotationAtDistanceAlongSpline(0.0f);
-		float rotation = FMath::LerpStable(enemyRot.Yaw, targetRot.Yaw, deltaTime*rotationLerpSpeed); 
+
+		float t = deltaTime*rotationLerpSpeed;
+		float v0 = enemyRot.Yaw;
+		float v1 = targetRot.Yaw;
+		float rotation = (1 - t)*v0 + t*v1;
+		//float rotation = FMath::LerpStable(enemyRot.Yaw, targetRot.Yaw, deltaTime*rotationLerpSpeed); 
 		FRotator newRot = FRotator(enemyRot.Pitch, rotation, enemyRot.Roll);
 		SetActorRotation(newRot);
 	}
@@ -88,7 +94,11 @@ void AEnemies::CalculateDistancePercentage(float deltaTime)
 		if (!isWalking)
 		{
 			float adjustedTime = deltaTime*speedFactor*baseSpeedJump;
-			result = FMath::Lerp(adjustedTime, (sin(abs(zDirector)) * adjustedTime), jumpLerp) + distPerc;
+			float t = jumpLerp;
+			float v0 = adjustedTime;
+			float v1 = (sin(abs(zDirector)) * adjustedTime);
+			result = ((1 - t)*v0 + t*v1) + distPerc;
+			//result = FMath::Lerp(adjustedTime,(sin(abs(zDirector)) * adjustedTime) , jumpLerp) + distPerc;
 		}
 		else
 		{
@@ -185,7 +195,7 @@ void AEnemies::spawnKnife(GuardianTypeEnum guardianType)
 
 void AEnemies::GotHit(GuardianTypeEnum guardianType)
 {
-	int32 calculatedDamage=0;
+	int32 calculatedDamage = 0;
 	switch (guardianType)
 	{
 	case GuardianTypeEnum::Toaster:
@@ -198,15 +208,34 @@ void AEnemies::GotHit(GuardianTypeEnum guardianType)
 		calculatedDamage = 1;
 		break;
 	}
-
-	hitPoints -= calculatedDamage;
-	if (hitPoints <= 0)
+	if (isEnemyVulnerable)
 	{
-		diedFeedback();
+		hitPoints -= calculatedDamage;
+		if (hitPoints <= 0)
+		{
+			diedFeedback();
+		}
+		else
+		{
+			GotHitFeedback();
+		}
 	}
 	else
 	{
-		GotHitFeedback();
+		switch (guardianType)
+		{
+		case GuardianTypeEnum::Toaster:
+			guardianToast->GotHit();
+			break;
+		case GuardianTypeEnum::Rice:
+			guardianRice->GotHit();
+			break;
+		case GuardianTypeEnum::Ice:
+			guardianIce->GotHit();
+			break;
+		}
+
+
 	}
 
 }
