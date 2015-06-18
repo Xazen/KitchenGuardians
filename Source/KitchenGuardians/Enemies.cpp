@@ -96,7 +96,7 @@ void AEnemies::CalculateDistancePercentage(float deltaTime)
 			float adjustedTime = deltaTime*speedFactor*baseSpeedJump;
 			float t = jumpLerp;
 			float v0 = adjustedTime;
-			float v1 = (sin(abs(zDirector)) * adjustedTime);
+			float v1 = (sin(fabs(zDirector)) * adjustedTime);
 			result = ((1 - t)*v0 + t*v1) + distPerc;
 			//result = FMath::Lerp(adjustedTime,(sin(abs(zDirector)) * adjustedTime) , jumpLerp) + distPerc;
 		}
