@@ -22,7 +22,13 @@ AGuardian::AGuardian()
 	reviveHitpointsNext = 1;
 	reviveTapsAdditional = 5;
 	reviveIsFirst = true;
-	projectilesRefillTime = 3.0f;
+	reviveIsActive = false;
+	isDead = false;
+	doFlash = false;
+	isReloading = false;
+	reloadTime = 2.0f;
+	reloadTimeCurrent = 0.0f;
+
 }
 
 // Called when the game starts or when spawned
@@ -31,9 +37,11 @@ void AGuardian::BeginPlay()
 	Super::BeginPlay();
 	projectilesCurrent = projectilesMaximum;
 	reviveTapsCurrent = reviveTapsStart;
+	/*
 	GetWorld()->GetTimerManager().SetTimer(reloadTimerHandle, this, &AGuardian::GotHit, projectilesRefillTime, true, (-1.0f));
 	if (GEngine)
 		GEngine->AddOnScreenDebugMessage(-1, 0.1f, FColor::White, TEXT("reload"));
+		*/
 }
 
 // Called every frame
@@ -42,38 +50,36 @@ void AGuardian::Tick( float DeltaTime )
 	Super::Tick( DeltaTime );
 }
 
+void AGuardian::Activate()
+{
+	activated = true;
+}
+void AGuardian::Deactivate()
+{
+	activated = false;
+}
+
 void AGuardian::GotHit()
 {
-	if(GEngine)
-		GEngine->AddOnScreenDebugMessage(-1, 0.1f, FColor::White, TEXT("THIS is PATRICK!"));
-
-
-	if (isDead())
+	GotHitFeedback();
+	if (reviveIsActive)
 	{
 		reviveTapsCurrent -= reviveTapsRemovedEnemy;
+		if (reviveTapsCurrent <= 0)
+		{
+			reviveTapsCurrent = 0;
+			isDead = true;
+		}
 	}
 	else{
 		hitpoints -= 1;
-		//if==0 initiate revivemechanic
+		if (hitpoints <= 0)
+		{
+			hitpoints = 0;
+			reviveIsActive = true;
+			InitRevive();
+		}
 	}
-
-}
-
-void AGuardian::Shot()
-{
-	projectilesCurrent -= 1;
-}
-
-bool AGuardian::canShoot()
-{
-	if (!activated)
-		return false;
-	if (hitpoints == 0)
-		return false;
-	if (projectilesCurrent == 0)
-		return false;
-
-	return true;
 
 }
 
@@ -89,36 +95,67 @@ void AGuardian::Revive()
 		hitpoints = reviveHitpointsNext;
 	}
 	reviveTapsCurrent = reviveTapsStart;
-
 	reviveTapsMaximum += reviveTapsAdditional;
-	//test
+	reviveIsActive = false;
 }
 
-bool AGuardian::isDead()
+
+void AGuardian::calculateReviveTapCurrent(float deltaSeconds)
 {
-	return hitpoints==0;
+	reviveTapsCurrent += deltaSeconds*reviveTapsRemovedSecond*reviveTapsRemovedSecondMultiplier;
 }
 
 
-void AGuardian::Activate()
+void AGuardian::Shot(int32 ammoCost)
 {
-	activated = true;
-}
-void AGuardian::Deactivate()
-{
-	activated = false;
+	ShotFeedback();
+	projectilesCurrent -= ammoCost;
 }
 
-void AGuardian::pauseReload()
+bool AGuardian::canShoot()
 {
-	GetWorld()->GetTimerManager().PauseTimer(reloadTimerHandle);
+	if (!activated)
+		return false;
+	if (hitpoints == 0)
+		return false;
+	if (isReloading)
+		return false;
+	if (projectilesCurrent == 0)
+		return false;
+	return true;
 
 }
 
-void AGuardian::unpauseReload()
+void AGuardian::reloadAmmo(float deltaSeconds)
 {
-	GetWorld()->GetTimerManager().UnPauseTimer(reloadTimerHandle);
+	if (isReloading)
+	{
+		reloadTimeCurrent += deltaSeconds;
+		projectilesCurrent = reloadTimeCurrent;
+		if (reloadTimeCurrent >= reloadTime)
+		{
+			isReloading = false;
+			projectilesMaximum = reloadTmpAmmoStore;
+			projectilesCurrent = projectilesMaximum;
+		}
+
+	}
+	else{
+		if (projectilesCurrent == 0)
+		{
+			initReload();
+		}
+	}
 }
+
+void AGuardian::initReload()
+{
+	isReloading = true;
+	reloadTmpAmmoStore = projectilesMaximum;
+	projectilesMaximum = reloadTime;
+	reloadTimeCurrent = 0.0f;
+}
+
 
 void AGuardian::addProjectile()
 {
@@ -126,3 +163,17 @@ void AGuardian::addProjectile()
 	if (projectilesCurrent > projectilesMaximum)
 		projectilesCurrent = projectilesMaximum;
 }
+
+
+/*
+void AGuardian::pauseReload()
+{
+GetWorld()->GetTimerManager().PauseTimer(reloadTimerHandle);
+
+}
+
+void AGuardian::unpauseReload()
+{
+GetWorld()->GetTimerManager().UnPauseTimer(reloadTimerHandle);
+}
+*/
