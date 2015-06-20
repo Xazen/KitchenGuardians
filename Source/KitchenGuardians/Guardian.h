@@ -11,8 +11,7 @@ UENUM(BlueprintType)		//"BlueprintType" is essential to include
 enum class GuardianTypeEnum : uint8
 {
 	Toaster 	UMETA(DisplayName = "Toaster"),
-	Rice 	UMETA(DisplayName = "Rice"),
-	Ice	UMETA(DisplayName = "Ice")
+	Rice 	UMETA(DisplayName = "Rice")
 };
 
 

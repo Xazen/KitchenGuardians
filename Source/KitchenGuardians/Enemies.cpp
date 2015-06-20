@@ -151,19 +151,12 @@ bool AEnemies::CheckDistancePercentage()
 				case 2:
 					hitToast();
 					break;
-				case 3:
-					hitIce();
-					break;
 			}
 			switch (guardianHitCaseEnum)
 			{
 			case GuardianTypeEnum::Rice:
 
 				break;
-			case GuardianTypeEnum::Ice:
-
-				break;
-
 			case GuardianTypeEnum::Toaster:
 
 				break;
@@ -185,10 +178,6 @@ void AEnemies::spawnKnife(GuardianTypeEnum guardianType)
 		knifeSpawn = guardianToast->GetTransform();
 		guardianToast->Shot(-1);
 		break;
-	case GuardianTypeEnum::Ice:
-		knifeSpawn = guardianIce->GetTransform();
-		guardianIce->Shot(-1);
-		break;
 	}
 	spawnKnifeExecute();
 }
@@ -204,9 +193,7 @@ void AEnemies::GotHit(GuardianTypeEnum guardianType)
 	case GuardianTypeEnum::Rice:
 		calculatedDamage = 1;
 		break;
-	case GuardianTypeEnum::Ice:
-		calculatedDamage = 1;
-		break;
+
 	}
 	if (isEnemyVulnerable)
 	{
@@ -229,9 +216,6 @@ void AEnemies::GotHit(GuardianTypeEnum guardianType)
 			break;
 		case GuardianTypeEnum::Rice:
 			guardianRice->GotHit();
-			break;
-		case GuardianTypeEnum::Ice:
-			guardianIce->GotHit();
 			break;
 		}
 

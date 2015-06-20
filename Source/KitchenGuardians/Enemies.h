@@ -113,7 +113,7 @@ public:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Movement")
 		bool isWalking;
 
-	// the point where the knifes spawn (i.e. the toaster or ice dispenser)
+	// the point where the knifes spawn (i.e. the toaster)
 	UPROPERTY(BlueprintReadWrite, Category = "EnemyProps")
 		FTransform knifeSpawn;
 
@@ -135,9 +135,7 @@ public:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "EnemyProps")
 	AGuardian *guardianToast;
 
-	// Guardian Ice Reference
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "EnemyProps")
-	AGuardian *guardianIce;
+
 
 
 	///
@@ -191,11 +189,6 @@ public:
 	// trigger event when guardian toast gets hit 
 	UFUNCTION(BlueprintImplementableEvent, Category = "SendDmgFunctions")
 		void hitToast(); 
-
-	// trigger event when guardian ice gets hit 
-	UFUNCTION(BlueprintImplementableEvent, Category = "SendDmgFunctions")
-		void hitIce(); 
-
 
 
 };
