@@ -3,7 +3,7 @@
 #pragma once
 
 #include "GameFramework/Actor.h"
-#include "Classes/Components/SplineComponent.h"
+#include "Curve.h"
 #include "Classes/Particles/ParticleSystem.h"
 #include "Guardian.h"
 
@@ -38,11 +38,10 @@ public:
 	///
 	///	UPROPERTYS
 	///
-	//bla
+
 	//type of Enemy
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "EnemyProps")
 	EnemyTypeEnum enemyType;
-
 
 	// Hitpoints of Enemy
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "EnemyProps")
@@ -51,7 +50,6 @@ public:
 	// whether the player can damage the enemy or will receive damage when attacking it - only used for chily by now
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "EnemyProps")
 	bool isEnemyVulnerable; //default value is true
-
 
 	// Score the player gets for killing this enemy
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "EnemyProps")
@@ -67,7 +65,7 @@ public:
 
 	// Linear Interpolation between constant forward movement (0) and speed depending on how steep the spline is (1)
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Movement")
-		float jumpLerp;
+	float jumpLerp;
 
 	// Speed-Factor that defines how fast he is walking - intended to be used to set up general movement
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Movement")
@@ -75,11 +73,11 @@ public:
 
 	// How fast the enemy rotates towards the new jumpdirection between jumps, while idling
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Movement")
-		float rotationLerpSpeed;
+	float rotationLerpSpeed;
 	
 	// Spline Component List - where the enemy will move along
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Movement")
-	TArray<USplineComponent*> splineList;
+	TArray<ACurve*> curveList;
 
 	//type of Enemy
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Movement")
@@ -107,25 +105,19 @@ public:
 	
 	// Distance Percentage the enemy is located on the current Spline
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Movement")
-		float idleCurrentTime;
+	float idleCurrentTime;
 
 	// Distance Percentage the enemy is located on the current Spline
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Movement")
-		bool isWalking;
+	bool isWalking;
 
-	// the point where the knifes spawn (i.e. the toaster or ice dispenser)
+	// the point where the knifes spawn (i.e. the toaster)
 	UPROPERTY(BlueprintReadWrite, Category = "EnemyProps")
-		FTransform knifeSpawn;
-
-	// Which Guardian this Enemy will be reducing hitpoints when reaching the end of its path
-	UPROPERTY(BlueprintReadWrite, Category = "EnemyProps")
-		int32 guardianHitCase;
-		//guardianTypeEnum guardianHitCase could also be used;
+	FTransform knifeSpawn;
 
 	// Which Guardian this Enemy will be reducing hitpoints when reaching the end of its path
 	UPROPERTY(BlueprintReadWrite, Category = "EnemyProps")
-		GuardianTypeEnum guardianHitCaseEnum;
-	//guardianTypeEnum guardianHitCase could also be used;
+	GuardianTypeEnum guardianHitCaseEnum;
 
 	// Guardian Rice Reference
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "EnemyProps")
@@ -134,10 +126,6 @@ public:
 	// Guardian Toast Reference
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "EnemyProps")
 	AGuardian *guardianToast;
-
-	// Guardian Ice Reference
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "EnemyProps")
-	AGuardian *guardianIce;
 
 
 	///
@@ -191,11 +179,6 @@ public:
 	// trigger event when guardian toast gets hit 
 	UFUNCTION(BlueprintImplementableEvent, Category = "SendDmgFunctions")
 		void hitToast(); 
-
-	// trigger event when guardian ice gets hit 
-	UFUNCTION(BlueprintImplementableEvent, Category = "SendDmgFunctions")
-		void hitIce(); 
-
 
 
 };

@@ -13,7 +13,6 @@ AEnemies::AEnemies()
 	speedFactor = 1;
 	currentSpline = 0;
 	distPerc = 0.0f;
-	guardianHitCase = 1;
 	idleTime = 0.5f;
 	isWalking = false;
 	jumpLerp = 0.45f;
@@ -36,7 +35,7 @@ void AEnemies::MoveEnemyAlongSpline()
 	{
 		if (!isWalking)
 		{
-			FVector newLocation = splineList[currentSpline]->GetWorldLocationAtDistanceAlongSpline(splineList[currentSpline]->GetSplineLength() * distPerc);
+			FVector newLocation = curveList[currentSpline]->splineComponent->GetWorldLocationAtDistanceAlongSpline(curveList[currentSpline]->splineComponent->GetSplineLength() * distPerc);
 			SetActorLocation(newLocation, false);
 			switch (enemyMoveType)
 			{
@@ -53,7 +52,7 @@ void AEnemies::MoveEnemyAlongSpline()
 		}
 		else
 		{
-			FVector newLocation = splineList[currentSpline]->GetWorldLocationAtDistanceAlongSpline(splineList[currentSpline]->GetSplineLength() * distPerc);
+			FVector newLocation = curveList[currentSpline]->splineComponent->GetWorldLocationAtDistanceAlongSpline(curveList[currentSpline]->splineComponent->GetSplineLength() * distPerc);
 			SetActorLocation(newLocation, false);
 		}
 
@@ -66,7 +65,7 @@ void AEnemies::Rotate(float deltaTime)
 	if (isIdle)
 	{
 		FRotator enemyRot = GetActorRotation();
-		FRotator targetRot = splineList[currentSpline+1]->GetWorldRotationAtDistanceAlongSpline(0.0f);
+		FRotator targetRot = curveList[currentSpline + 1]->splineComponent->GetWorldRotationAtDistanceAlongSpline(0.0f);
 
 		float t = deltaTime*rotationLerpSpeed;
 		float v0 = enemyRot.Yaw;
@@ -79,7 +78,7 @@ void AEnemies::Rotate(float deltaTime)
 	else
 	{
 		FRotator enemyRot = GetActorRotation();
-		FRotator targetRot = splineList[currentSpline]->GetWorldRotationAtDistanceAlongSpline(splineList[currentSpline]->GetSplineLength() * distPerc);
+		FRotator targetRot = curveList[currentSpline]->splineComponent->GetWorldRotationAtDistanceAlongSpline(curveList[currentSpline]->splineComponent->GetSplineLength() * distPerc);
 		FRotator newRot = FRotator(enemyRot.Pitch, targetRot.Yaw, enemyRot.Roll);
 		SetActorRotation(newRot);
 	}
@@ -90,7 +89,7 @@ void AEnemies::CalculateDistancePercentage(float deltaTime)
 	if (!isIdle)
 	{
 		float result;
-		float zDirector = splineList[currentSpline]->GetWorldDirectionAtDistanceAlongSpline(splineList[currentSpline]->GetSplineLength() * distPerc).Z;
+		float zDirector = curveList[currentSpline]->splineComponent->GetWorldDirectionAtDistanceAlongSpline(curveList[currentSpline]->splineComponent->GetSplineLength() * distPerc).Z;
 		if (!isWalking)
 		{
 			float adjustedTime = deltaTime*speedFactor*baseSpeedJump;
@@ -119,7 +118,7 @@ bool AEnemies::CheckDistancePercentage()
 {
 	if (distPerc >= 1.0f)
 	{
-		if (currentSpline < (splineList.Num() - 1))
+		if (currentSpline < (curveList.Num() - 1))
 		{
 
 			if (!isIdle)
@@ -143,27 +142,11 @@ bool AEnemies::CheckDistancePercentage()
 		}
 		else
 		{
-			switch (guardianHitCase)
-			{
-				case 1:
-					hitRice();
-				break;
-				case 2:
-					hitToast();
-					break;
-				case 3:
-					hitIce();
-					break;
-			}
 			switch (guardianHitCaseEnum)
 			{
 			case GuardianTypeEnum::Rice:
 
 				break;
-			case GuardianTypeEnum::Ice:
-
-				break;
-
 			case GuardianTypeEnum::Toaster:
 
 				break;
@@ -185,10 +168,6 @@ void AEnemies::spawnKnife(GuardianTypeEnum guardianType)
 		knifeSpawn = guardianToast->GetTransform();
 		guardianToast->Shot(-1);
 		break;
-	case GuardianTypeEnum::Ice:
-		knifeSpawn = guardianIce->GetTransform();
-		guardianIce->Shot(-1);
-		break;
 	}
 	spawnKnifeExecute();
 }
@@ -204,9 +183,7 @@ void AEnemies::GotHit(GuardianTypeEnum guardianType)
 	case GuardianTypeEnum::Rice:
 		calculatedDamage = 1;
 		break;
-	case GuardianTypeEnum::Ice:
-		calculatedDamage = 1;
-		break;
+
 	}
 	if (isEnemyVulnerable)
 	{
@@ -229,9 +206,6 @@ void AEnemies::GotHit(GuardianTypeEnum guardianType)
 			break;
 		case GuardianTypeEnum::Rice:
 			guardianRice->GotHit();
-			break;
-		case GuardianTypeEnum::Ice:
-			guardianIce->GotHit();
 			break;
 		}
 
