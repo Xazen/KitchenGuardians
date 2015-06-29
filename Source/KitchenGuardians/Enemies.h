@@ -15,7 +15,8 @@ enum class EnemyTypeEnum : uint8
 {
 	Aubergine 	UMETA(DisplayName = "Aubergine"),
 	Mushroom 	UMETA(DisplayName = "Mushroom"),
-	Chili	UMETA(DisplayName = "Chili")
+	Chili		UMETA(DisplayName = "Chili"),
+	Pumpkin		UMETA(DisplayName = "Pumpkin")
 };
 
 UENUM(BlueprintType)		//"BlueprintType" is essential to include
