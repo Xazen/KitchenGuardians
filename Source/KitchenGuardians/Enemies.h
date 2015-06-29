@@ -168,9 +168,25 @@ public:
 	UFUNCTION(BlueprintImplementableEvent, Category = "ReceiveDmgFunctions")
 		void GotHitFeedback();
 
+	// plays all the Effects(particles, sounds, giblets...) when an Enemy got hit by a toast projectile  - but has remaining hitpoints
+	UFUNCTION(BlueprintImplementableEvent, Category = "ReceiveDmgFunctions")
+		void GotHitToastFeedback();
+
+	// plays all the Effects(particles, sounds, giblets...) when an Enemy got hit by a swipe  - but has remaining hitpoints
+	UFUNCTION(BlueprintImplementableEvent, Category = "ReceiveDmgFunctions")
+		void GotHitRiceFeedback();
+
 	// plays all the Effects when an Enemy dies (particles, sounds, giblets...)
 	UFUNCTION(BlueprintImplementableEvent, Category = "ReceiveDmgFunctions")
 		void diedFeedback(); 
+
+	// plays all the Effects when an Enemy dies via toast (particles, sounds, giblets...)
+	UFUNCTION(BlueprintImplementableEvent, Category = "ReceiveDmgFunctions")
+		void diedToastFeedback();
+
+	// plays all the Effects when an Enemy dies via swipe (particles, sounds, giblets...)
+	UFUNCTION(BlueprintImplementableEvent, Category = "ReceiveDmgFunctions")
+		void diedRiceFeedback();
 
 	// trigger event when guardian rice gets hit 
 	UFUNCTION(BlueprintImplementableEvent, Category = "SendDmgFunctions")
