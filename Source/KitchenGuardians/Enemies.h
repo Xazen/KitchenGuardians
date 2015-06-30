@@ -120,10 +120,6 @@ public:
 	UPROPERTY(BlueprintReadWrite, Category = "EnemyProps")
 	GuardianTypeEnum guardianHitCaseEnum;
 
-	// Guardian Rice Reference
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "EnemyProps")
-	AGuardian *guardianRice;
-
 	// Guardian Toast Reference
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "EnemyProps")
 	AGuardian *guardianToast;

@@ -144,9 +144,6 @@ bool AEnemies::CheckDistancePercentage()
 		{
 			switch (guardianHitCaseEnum)
 			{
-			case GuardianTypeEnum::Rice:
-
-				break;
 			case GuardianTypeEnum::Toaster:
 
 				break;
@@ -224,9 +221,6 @@ void AEnemies::GotHit(GuardianTypeEnum guardianType)
 		{
 		case GuardianTypeEnum::Toaster:
 			guardianToast->GotHit();
-			break;
-		case GuardianTypeEnum::Rice:
-			guardianRice->GotHit();
 			break;
 		}
 
