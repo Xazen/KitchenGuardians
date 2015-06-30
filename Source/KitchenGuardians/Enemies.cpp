@@ -190,11 +190,32 @@ void AEnemies::GotHit(GuardianTypeEnum guardianType)
 		hitPoints -= calculatedDamage;
 		if (hitPoints <= 0)
 		{
-			diedFeedback();
+			//diedFeedback();
+			switch (guardianType)
+			{
+			case GuardianTypeEnum::Toaster:
+				diedToastFeedback();
+				break;
+			case GuardianTypeEnum::Rice:
+				diedRiceFeedback();
+				break;
+
+			}
+			
 		}
 		else
 		{
-			GotHitFeedback();
+			//GotHitFeedback();
+			switch (guardianType)
+			{
+			case GuardianTypeEnum::Toaster:
+				GotHitToastFeedback();
+				break;
+			case GuardianTypeEnum::Rice:
+				GotHitRiceFeedback();
+				break;
+
+			}
 		}
 	}
 	else
