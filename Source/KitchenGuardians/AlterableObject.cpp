@@ -1,11 +1,12 @@
 // Fill out your copyright notice in the Description page of Project Settings.
 
 #include "KitchenGuardians.h"
-#include "SpawnController.h"
+#include "AlterableObject.h"
 
 
 // Sets default values
-ASpawnController::ASpawnController()
+AAlterableObject::AAlterableObject()
 {
 	// Constructor
 }
+

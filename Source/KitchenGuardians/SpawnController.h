@@ -29,7 +29,6 @@ public:
 	///	UPROPERTYS
 	///
 
-	// Empty
 
 	///
 	///	UFUNCTIONS
@@ -37,11 +36,5 @@ public:
 
 	// Sets default values for this actor's properties
 	ASpawnController();
-
-	// Called when the game starts or when spawned
-	//virtual void BeginPlay() override;
-
-	// Called every frame
-	//virtual void Tick(float DeltaSeconds) override;
 
 };
