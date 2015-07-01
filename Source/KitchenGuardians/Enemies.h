@@ -125,6 +125,14 @@ public:
 	AGuardian *guardianToast;
 
 
+	// The minimum Gibblet Impulse
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "FeedbackProps")
+		int32 minGibbletImpulse;
+
+	// The maximum Gibblet Impulse
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "FeedbackProps")
+		int32 maxGibbletImpulse;
+
 	///
 	///	UFUNCTIONS
 	///
@@ -193,5 +201,7 @@ public:
 	UFUNCTION(BlueprintImplementableEvent, Category = "SendDmgFunctions")
 		void hitToast(); 
 
-
+	// Add Random Impulse to Gibblet
+	UFUNCTION(BlueprintCallable, Category = "FeedbackFunctions")
+		void AddGibbletImpulse2(UPrimitiveComponent* Gibblet);
 };

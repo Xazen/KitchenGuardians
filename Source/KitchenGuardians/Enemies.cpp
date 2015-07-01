@@ -20,6 +20,8 @@ AEnemies::AEnemies()
 	baseSpeedWalk = 1.0f;
 	rotationLerpSpeed = 7.5f;
 	isEnemyVulnerable = true;
+	minGibbletImpulse = 30;
+	maxGibbletImpulse = 120;
 }
 
 // Called when the game starts or when spawned
@@ -229,5 +231,12 @@ void AEnemies::GotHit(GuardianTypeEnum guardianType)
 
 }
 
-
+void AEnemies::AddGibbletImpulse2(UPrimitiveComponent* Gibblet)
+{
+	FVector force;
+	force.X = FMath::RandRange(-1, 1) * FMath::RandRange(minGibbletImpulse, maxGibbletImpulse);
+	force.Y = FMath::RandRange(-1, 1) * FMath::RandRange(minGibbletImpulse, maxGibbletImpulse);
+	force.Z = FMath::RandRange(-1, 1) * FMath::RandRange(minGibbletImpulse, maxGibbletImpulse);
+	Gibblet->AddImpulse(force,"None",true);
+}
 
