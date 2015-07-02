@@ -115,6 +115,7 @@ void AEnemies::CalculateDistancePercentage(float deltaTime)
 	}
 
 }
+
 //return true if enemy has reached its goal
 bool AEnemies::CheckDistancePercentage()
 {
@@ -147,7 +148,7 @@ bool AEnemies::CheckDistancePercentage()
 			switch (guardianHitCaseEnum)
 			{
 			case GuardianTypeEnum::Toaster:
-
+				hitToast();
 				break;
 
 			}
@@ -158,18 +159,6 @@ bool AEnemies::CheckDistancePercentage()
 	return false;
 }
 
-void AEnemies::spawnKnife(GuardianTypeEnum guardianType)
-{
-
-	switch (guardianType)
-	{
-	case GuardianTypeEnum::Toaster:
-		knifeSpawn = guardianToast->GetTransform();
-		guardianToast->Shot(-1);
-		break;
-	}
-	spawnKnifeExecute();
-}
 
 void AEnemies::GotHit(GuardianTypeEnum guardianType)
 {
@@ -222,6 +211,9 @@ void AEnemies::GotHit(GuardianTypeEnum guardianType)
 		switch (guardianType)
 		{
 		case GuardianTypeEnum::Toaster:
+			guardianToast->GotHit();
+			break;
+		case GuardianTypeEnum::Rice:
 			guardianToast->GotHit();
 			break;
 		}
