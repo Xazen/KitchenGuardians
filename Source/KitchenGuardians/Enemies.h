@@ -185,4 +185,8 @@ public:
 	// Add Random Impulse to Gibblet
 	UFUNCTION(BlueprintCallable, Category = "FeedbackFunctions")
 		void AddGibbletImpulse2(UPrimitiveComponent* Gibblet);
+
+	// trigger event when enemy blocks an attack (i.e. when he got attacked while being invulnerable)
+	UFUNCTION(BlueprintImplementableEvent, Category = "SendDmgFunctions")
+		void gotHitInvulnerableFeedback();
 };

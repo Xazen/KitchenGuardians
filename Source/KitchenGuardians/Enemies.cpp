@@ -211,8 +211,7 @@ void AEnemies::GotHit(GuardianTypeEnum guardianType)
 			guardianToast->GotHit();
 			break;
 		}
-
-
+		gotHitInvulnerableFeedback();
 	}
 
 }
