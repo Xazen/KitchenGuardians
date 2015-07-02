@@ -167,7 +167,7 @@ public:
 
 	// Take calculated Damage and assign it to enemy
 	UFUNCTION(BlueprintCallable, Category = "ReceiveDmgFunctions")
-		void GotHit(GuardianTypeEnum guardianType);
+		void GotHit(AttackTypeEnum attackType);
 
 	// plays all the Effects(particles, sounds, giblets...) when an Enemy got hit by a toast projectile  - but has remaining hitpoints
 	UFUNCTION(BlueprintImplementableEvent, Category = "ReceiveDmgFunctions")

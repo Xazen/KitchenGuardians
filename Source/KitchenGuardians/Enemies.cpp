@@ -156,66 +156,42 @@ bool AEnemies::CheckDistancePercentage()
 }
 
 
-void AEnemies::GotHit(GuardianTypeEnum guardianType)
+void AEnemies::GotHit(AttackTypeEnum attackType)
 {
-	int32 calculatedDamage = 0;
-	switch (guardianType)
-	{
-	case GuardianTypeEnum::Toaster:
-		calculatedDamage = dmgTap;
-		break;
-	case GuardianTypeEnum::Rice:
-		calculatedDamage = dmgSwipe;
-		break;
-
-	}
 	if (isEnemyVulnerable)
 	{
-		hitPoints -= calculatedDamage;
-		if (hitPoints <= 0)
+		switch (attackType)
 		{
-			//diedFeedback();
-			switch (guardianType)
+		case AttackTypeEnum::Tap:
+
+			hitPoints -= dmgTap;
+			if (hitPoints <= 0)
 			{
-			case GuardianTypeEnum::Toaster:
 				diedToastFeedback();
-				break;
-			case GuardianTypeEnum::Rice:
-				diedRiceFeedback();
-				break;
-
 			}
-			
-		}
-		else
-		{
-			//GotHitFeedback();
-			switch (guardianType)
+			else
 			{
-			case GuardianTypeEnum::Toaster:
 				GotHitToastFeedback();
-				break;
-			case GuardianTypeEnum::Rice:
-				GotHitRiceFeedback();
-				break;
-
 			}
+			break;
+		case AttackTypeEnum::Swipe:
+			hitPoints -= dmgSwipe;
+			if (hitPoints <= 0)
+			{
+				diedRiceFeedback();
+			}
+			else
+			{
+				GotHitRiceFeedback();
+			}
+			break;
 		}
-	}
+	} 
 	else
 	{
-		switch (guardianType)
-		{
-		case GuardianTypeEnum::Toaster:
-			guardianToast->GotHit();
-			break;
-		case GuardianTypeEnum::Rice:
-			guardianToast->GotHit();
-			break;
-		}
+		guardianToast->GotHit();
 		gotHitInvulnerableFeedback();
 	}
-
 }
 
 void AEnemies::AddGibbletImpulse2(UPrimitiveComponent* Gibblet)
