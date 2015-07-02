@@ -225,3 +225,31 @@ void AEnemies::AddGibbletImpulse2(UPrimitiveComponent* Gibblet)
 	Gibblet->AddImpulse(force,"None",true);
 }
 
+float AEnemies::calcDropShadowAlpha(float zDistance)
+{
+	//lerp?
+
+	if (zDistance > 100)
+		return 0.3f;
+
+	if (zDistance > 80)
+		return 0.4f;
+
+	if (zDistance > 60)
+		return 0.5f;
+
+	if (zDistance > 40)
+		return 0.6f;
+
+	if (zDistance > 30)
+		return 0.7f;
+
+	if (zDistance > 20)
+		return 0.8f;
+
+	if (zDistance > 10)
+		return 0.9f;
+
+	return 1.0f;
+
+}

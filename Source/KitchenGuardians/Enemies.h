@@ -189,4 +189,9 @@ public:
 	// trigger event when enemy blocks an attack (i.e. when he got attacked while being invulnerable)
 	UFUNCTION(BlueprintImplementableEvent, Category = "SendDmgFunctions")
 		void gotHitInvulnerableFeedback();
+
+
+	// calculates the transparency of the shadow according to the distance to the ground
+	UFUNCTION(BlueprintCallable, Category = "FeedbackFunctions")
+		float calcDropShadowAlpha(float zDistance);
 };
