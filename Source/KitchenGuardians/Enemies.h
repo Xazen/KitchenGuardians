@@ -180,7 +180,7 @@ public:
 
 	// trigger event when guardian toast gets hit 
 	UFUNCTION(BlueprintImplementableEvent, Category = "SendDmgFunctions")
-		void hitToast(); 
+		void hitToastFeedback(); 
 
 	// Add Random Impulse to Gibblet
 	UFUNCTION(BlueprintCallable, Category = "FeedbackFunctions")

@@ -145,15 +145,9 @@ bool AEnemies::CheckDistancePercentage()
 		}
 		else
 		{
-			switch (guardianHitCaseEnum)
-			{
-			case GuardianTypeEnum::Toaster:
-				hitToast();
-				break;
-
-			}
+			guardianToast->GotHit();
+			hitToastFeedback();
 			return true;
-			Destroy();
 		}
 	}
 	return false;
