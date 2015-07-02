@@ -14,7 +14,12 @@ enum class GuardianTypeEnum : uint8
 	Rice 	UMETA(DisplayName = "Rice")
 };
 
-
+UENUM(BlueprintType)		//"BlueprintType" is essential to include
+enum class AttackTypeEnum : uint8
+{
+	Tap 	UMETA(DisplayName = "Tap"),
+	Swipe 	UMETA(DisplayName = "Swipe")
+};
 
 UCLASS()
 class KITCHENGUARDIANS_API AGuardian : public AActor
@@ -33,16 +38,16 @@ public:
 
 
 	//type of Guardian
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "GuardianProps")
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "GuardianPropsBalancing")
 		GuardianTypeEnum guardianType;
 	
 	// hitpoints of this Guardian
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "GuardianProps")
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "GuardianPropsBalancing")
 		int32 hitpoints;
 
 
 	// initial and maximum amount of projectiles of this Guardian
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Ammunition")
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "AmmunitionBalancing")
 		float projectilesMaximum; //float because of possible "over time" or "swipe length" depletion
 
 	// current amount of projectiles of this Guardian
@@ -54,7 +59,7 @@ public:
 		bool isReloading;
 
 	// time in seconds the reload process takes
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Ammunition")
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "AmmunitionBalancing")
 		float reloadTime;
 
 	// time the Current Reload process has past
@@ -67,7 +72,7 @@ public:
 
 
 	// Flag to check whether the player failed to revive
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Revive Mechanic")
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Player Feedback")
 		bool isDead;
 	
 	// bool used to execute a red screen flash

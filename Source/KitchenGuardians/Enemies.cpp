@@ -22,6 +22,8 @@ AEnemies::AEnemies()
 	isEnemyVulnerable = true;
 	minGibbletImpulse = 30;
 	maxGibbletImpulse = 120;
+	dmgTap = 9;
+	dmgSwipe = 1;
 }
 
 // Called when the game starts or when spawned
@@ -160,10 +162,10 @@ void AEnemies::GotHit(GuardianTypeEnum guardianType)
 	switch (guardianType)
 	{
 	case GuardianTypeEnum::Toaster:
-		calculatedDamage = 9;
+		calculatedDamage = dmgTap;
 		break;
 	case GuardianTypeEnum::Rice:
-		calculatedDamage = 1;
+		calculatedDamage = dmgSwipe;
 		break;
 
 	}

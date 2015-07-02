@@ -41,39 +41,46 @@ public:
 	///
 
 	//type of Enemy
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "EnemyProps")
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "EnemyPropsBalancing")
 	EnemyTypeEnum enemyType;
 
 	// Hitpoints of Enemy
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "EnemyProps")
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "EnemyPropsBalancing")
 	int32 hitPoints;
+
+	// How much Damage the Enemy receives via Tap
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "EnemyPropsBalancing")
+		int32 dmgTap;
+	// How much Damage the Enemy receives via Tap
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "EnemyPropsBalancing")
+		int32 dmgSwipe;
 
 	// whether the player can damage the enemy or will receive damage when attacking it - only used for chily by now
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "EnemyProps")
 	bool isEnemyVulnerable; //default value is true
 
 	// Score the player gets for killing this enemy
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "EnemyProps")
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "EnemyPropsBalancing")
 	int32 baseScore;
 
 	// overall Speed-Factor of Enemy that defines how fast he is moving - intended to be used for different difficulties
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Movement")
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "MovementBalancing")
 	float speedFactor;
 
 	// Speed-Factor that defines how fast he is jumping - intended to be used to set up general movement
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Movement")
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "MovementBalancing")
 	float baseSpeedJump;
 
 	// Linear Interpolation between constant forward movement (0) and speed depending on how steep the spline is (1)
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Movement")
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "MovementBalancing")
 	float jumpLerp;
 
 	// Speed-Factor that defines how fast he is walking - intended to be used to set up general movement
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Movement")
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "MovementBalancing")
 	float baseSpeedWalk;
 
 	// How fast the enemy rotates towards the new jumpdirection between jumps, while idling
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Movement")
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "MovementBalancing")
 	float rotationLerpSpeed;
 	
 	// Spline Component List - where the enemy will move along
@@ -96,19 +103,19 @@ public:
 	UPROPERTY(BlueprintReadWrite, Category = "Movement")
 	float distPerc;
 
-	// Distance Percentage the enemy is located on the current Spline
+	// Whether this enemy currently idles
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Movement")
 	bool isIdle;
 
-	// Distance Percentage the enemy is located on the current Spline
+	// How long this enemy will idle between jumps
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Movement")
 	float idleTime;
 	
-	// Distance Percentage the enemy is located on the current Spline
+	// How long this enemy currently idles
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Movement")
 	float idleCurrentTime;
 
-	// Distance Percentage the enemy is located on the current Spline
+	// Whether this enemy currently walks
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Movement")
 	bool isWalking;
 
@@ -116,7 +123,7 @@ public:
 	UPROPERTY(BlueprintReadWrite, Category = "EnemyProps")
 	FTransform knifeSpawn;
 
-	// Which Guardian this Enemy will be reducing hitpoints when reaching the end of its path
+	// Which Guardian this Enemy will be reducing hitpoints when reaching the end of its path - unused
 	UPROPERTY(BlueprintReadWrite, Category = "EnemyProps")
 	GuardianTypeEnum guardianHitCaseEnum;
 
@@ -126,11 +133,11 @@ public:
 
 
 	// The minimum Gibblet Impulse
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "FeedbackProps")
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "FeedbackPropsBalancing")
 		int32 minGibbletImpulse;
 
 	// The maximum Gibblet Impulse
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "FeedbackProps")
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "FeedbackPropsBalancing")
 		int32 maxGibbletImpulse;
 
 	///
