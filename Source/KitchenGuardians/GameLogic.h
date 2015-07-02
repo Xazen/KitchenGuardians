@@ -40,6 +40,10 @@ public:
 	// Kill Counter for Onions
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "GameSessionProps")
 		int32 killCounterOnions;
+
+	// Kill Counter for Pumpkins
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "GameSessionProps")
+		int32 killCounterPumpkin;
 	
 	// The initial TimeDelta between Spawns
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "SpawningEnemies")

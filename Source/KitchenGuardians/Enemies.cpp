@@ -20,6 +20,10 @@ AEnemies::AEnemies()
 	baseSpeedWalk = 1.0f;
 	rotationLerpSpeed = 7.5f;
 	isEnemyVulnerable = true;
+	minGibbletImpulse = 30;
+	maxGibbletImpulse = 120;
+	dmgTap = 9;
+	dmgSwipe = 1;
 }
 
 // Called when the game starts or when spawned
@@ -113,6 +117,7 @@ void AEnemies::CalculateDistancePercentage(float deltaTime)
 	}
 
 }
+
 //return true if enemy has reached its goal
 bool AEnemies::CheckDistancePercentage()
 {
@@ -142,77 +147,87 @@ bool AEnemies::CheckDistancePercentage()
 		}
 		else
 		{
-			switch (guardianHitCaseEnum)
-			{
-			case GuardianTypeEnum::Rice:
-
-				break;
-			case GuardianTypeEnum::Toaster:
-
-				break;
-
-			}
+			guardianToast->GotHit();
+			hitToastFeedback();
 			return true;
-			Destroy();
 		}
 	}
 	return false;
 }
 
-void AEnemies::spawnKnife(GuardianTypeEnum guardianType)
+
+void AEnemies::GotHit(AttackTypeEnum attackType)
 {
-
-	switch (guardianType)
-	{
-	case GuardianTypeEnum::Toaster:
-		knifeSpawn = guardianToast->GetTransform();
-		guardianToast->Shot(-1);
-		break;
-	}
-	spawnKnifeExecute();
-}
-
-void AEnemies::GotHit(GuardianTypeEnum guardianType)
-{
-	int32 calculatedDamage = 0;
-	switch (guardianType)
-	{
-	case GuardianTypeEnum::Toaster:
-		calculatedDamage = 9;
-		break;
-	case GuardianTypeEnum::Rice:
-		calculatedDamage = 1;
-		break;
-
-	}
 	if (isEnemyVulnerable)
 	{
-		hitPoints -= calculatedDamage;
-		if (hitPoints <= 0)
+		switch (attackType)
 		{
-			diedFeedback();
+		case AttackTypeEnum::Tap:
+
+			hitPoints -= dmgTap;
+			if (hitPoints <= 0)
+			{
+				diedToastFeedback();
+			}
+			else
+			{
+				GotHitToastFeedback();
+			}
+			break;
+		case AttackTypeEnum::Swipe:
+			hitPoints -= dmgSwipe;
+			if (hitPoints <= 0)
+			{
+				diedRiceFeedback();
+			}
+			else
+			{
+				GotHitRiceFeedback();
+			}
+			break;
 		}
-		else
-		{
-			GotHitFeedback();
-		}
-	}
+	} 
 	else
 	{
-		switch (guardianType)
-		{
-		case GuardianTypeEnum::Toaster:
-			guardianToast->GotHit();
-			break;
-		case GuardianTypeEnum::Rice:
-			guardianRice->GotHit();
-			break;
-		}
-
-
+		guardianToast->GotHit();
+		gotHitInvulnerableFeedback();
 	}
-
 }
 
+void AEnemies::AddGibbletImpulse2(UPrimitiveComponent* Gibblet)
+{
+	FVector force;
+	force.X = FMath::RandRange(-1, 1) * FMath::RandRange(minGibbletImpulse, maxGibbletImpulse);
+	force.Y = FMath::RandRange(-1, 1) * FMath::RandRange(minGibbletImpulse, maxGibbletImpulse);
+	force.Z = FMath::RandRange(-1, 1) * FMath::RandRange(minGibbletImpulse, maxGibbletImpulse);
+	Gibblet->AddImpulse(force,"None",true);
+}
 
+float AEnemies::calcDropShadowAlpha(float zDistance)
+{
+	//lerp?
 
+	if (zDistance > 100)
+		return 0.3f;
+
+	if (zDistance > 80)
+		return 0.4f;
+
+	if (zDistance > 60)
+		return 0.5f;
+
+	if (zDistance > 40)
+		return 0.6f;
+
+	if (zDistance > 30)
+		return 0.7f;
+
+	if (zDistance > 20)
+		return 0.8f;
+
+	if (zDistance > 10)
+		return 0.9f;
+
+	return 1.0f;
+
+}
