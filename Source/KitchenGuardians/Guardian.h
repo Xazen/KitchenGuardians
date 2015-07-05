@@ -95,7 +95,14 @@ public:
 	UFUNCTION(BlueprintImplementableEvent, Category = "FeedbackFunctions")
 		void GotHitFeedback(); 
 
-	
+	// trigger event for diedFeedback
+	UFUNCTION(BlueprintImplementableEvent, Category = "FeedbackFunctions")
+		void DiedFeedback();
+
+	// trigger event for reloadFeedback
+	UFUNCTION(BlueprintImplementableEvent, Category = "FeedbackFunctions")
+		void ReloadFeedback();
+
 	// Reduces the Ammunition by one - may not be applicable to Rice Guardian
 	UFUNCTION(BlueprintCallable, Category = "AmmunitionFunctions")
 		void Shot(int32 ammoCost);

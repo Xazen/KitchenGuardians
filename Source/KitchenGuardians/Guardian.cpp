@@ -36,11 +36,16 @@ void AGuardian::Tick( float DeltaTime )
 
 void AGuardian::GotHit()
 {
-	GotHitFeedback();
+	
 		hitpoints -= 1;
 		if (hitpoints <= 0)
 		{
 			hitpoints = 0;
+			DiedFeedback();
+		}
+		else
+		{
+			GotHitFeedback();
 		}
 		
 }
@@ -89,6 +94,7 @@ void AGuardian::reloadAmmo(float deltaSeconds)
 
 void AGuardian::initReload()
 {
+	ReloadFeedback();
 	isReloading = true;
 	reloadTmpAmmoStore = projectilesMaximum;
 	projectilesMaximum = reloadTime;
