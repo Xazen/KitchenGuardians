@@ -189,7 +189,6 @@ void AEnemies::GotHit(AttackTypeEnum attackType)
 	} 
 	else
 	{
-		guardianToast->GotHit();
 		gotHitInvulnerableFeedback();
 	}
 }
