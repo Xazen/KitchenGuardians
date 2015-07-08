@@ -94,13 +94,15 @@ void AEnemies::CalculateDistancePercentage(float deltaTime)
 	{
 		float result;
 		float zDirector = curveList[currentSpline]->splineComponent->GetWorldDirectionAtDistanceAlongSpline(curveList[currentSpline]->splineComponent->GetSplineLength() * distPerc).Z;
+		float currentSplinePosition = (curveList[currentSpline]->splineComponent->GetSplineLength())*distPerc;
+		float splineLength = curveList[currentSpline]->splineComponent->GetSplineLength();
 		if (!isWalking)
 		{
 			float adjustedTime = deltaTime*speedFactor*baseSpeedJump;
 			float t = jumpLerp;
 			float v0 = adjustedTime;
 			float v1 = (sin(fabs(zDirector)) * adjustedTime);
-			result = ((1 - t)*v0 + t*v1) + distPerc;
+			result = (((1 - t)*v0 + t*v1) +  currentSplinePosition) / splineLength;
 			//result = FMath::Lerp(adjustedTime,(sin(abs(zDirector)) * adjustedTime) , jumpLerp) + distPerc;
 		}
 		else
@@ -189,7 +191,6 @@ void AEnemies::GotHit(AttackTypeEnum attackType)
 	} 
 	else
 	{
-		guardianToast->GotHit();
 		gotHitInvulnerableFeedback();
 	}
 }
