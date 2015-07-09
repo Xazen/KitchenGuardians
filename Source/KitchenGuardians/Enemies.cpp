@@ -139,7 +139,15 @@ bool AEnemies::CheckDistancePercentage()
 				{
 					distPerc = 0.0f;
 					currentSpline++;
-					//isWalking = walkingList[currentSpline];
+					if (walkingList.Num() == curveList.Num())
+					{
+						isWalking = walkingList[currentSpline];
+					}
+					else
+					{
+						isWalking = false;
+					}
+					
 					isIdle = false;
 				}
 
