@@ -91,9 +91,13 @@ public:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Movement")
 	EnemyMoveTypeEnum enemyMoveType;
 
-	// Spline Component List - where the enemy will walk along
+	// Bool List, that shows which of the Splines the enemy will be walking
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Movement")
 	TArray<bool> walkingList;
+
+	// Float List, to define different Idle Times between jumps
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Movement")
+		TArray<float> idleList;
 
 	// index of Current Spline the enemy is moving on
 	UPROPERTY(BlueprintReadWrite, Category = "Movement")
