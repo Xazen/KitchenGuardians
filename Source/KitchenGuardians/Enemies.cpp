@@ -131,6 +131,10 @@ bool AEnemies::CheckDistancePercentage()
 			if (!isIdle)
 			{
 				isIdle = true;
+				if (idleList.Num() == curveList.Num() || idleList.Num() == curveList.Num()-1)
+				{
+					idleTime = idleList[currentSpline];
+				}
 				idleCurrentTime = 0;
 			}
 			if (isIdle)
