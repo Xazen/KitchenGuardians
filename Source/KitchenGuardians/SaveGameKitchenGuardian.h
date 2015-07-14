@@ -3,26 +3,26 @@
 #pragma once
 
 #include "GameFramework/SaveGame.h"
-#include "SaveGameKitchenGuardians.generated.h"
+#include "SaveGameKitchenGuardian.generated.h"
 
 /**
  * 
  */
 UCLASS()
-class KITCHENGUARDIANS_API USaveGameKitchenGuardians : public USaveGame
+class KITCHENGUARDIANS_API USaveGameKitchenGuardian : public USaveGame
 {
 	GENERATED_BODY()
 	
 public:
-	USaveGameKitchenGuardians(const FObjectInitializer& ObjectInitializer);
+	USaveGameKitchenGuardian(const FObjectInitializer& ObjectInitializer);
 
 	///
 	///	UPROPERTYS
 	///
 
-	// Name of Player
+	// List of Player names
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "SaveGameProps")
-	FString playerName;
+	TArray<FString> playerNameList;
 
 	// List of Saved Scores from Player
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "SaveGameProps")
@@ -34,10 +34,14 @@ public:
 
 	// Add First Score and Name
 	UFUNCTION(BlueprintCallable, Category = "SaveGameFunctions")
-	void AddFirstScore(int32 firstScore, FString newPlayerName);
+	void AddFirstScore(int32 firstScore);
 
 	// Save or Discard new Score
 	UFUNCTION(BlueprintCallable, Category = "SaveGameFunctions")
-	void SaveNewScore(int32 newScore);
+	int32 SaveNewScoreAndReturnIndex(int32 newScore);
+
+	// Change Name inside List
+	UFUNCTION(BlueprintCallable, Category = "SaveGameFunctions")
+	void ChangePlayerName(int32 listIndex, FString newPlayerName);
 	
 };

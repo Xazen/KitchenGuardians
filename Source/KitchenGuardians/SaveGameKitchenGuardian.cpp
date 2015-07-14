@@ -1,23 +1,24 @@
 // Fill out your copyright notice in the Description page of Project Settings.
 
 #include "KitchenGuardians.h"
-#include "SaveGameKitchenGuardians.h"
+#include "SaveGameKitchenGuardian.h"
 
 
-USaveGameKitchenGuardians::USaveGameKitchenGuardians(const FObjectInitializer& ObjectInitializer)
+USaveGameKitchenGuardian::USaveGameKitchenGuardian(const FObjectInitializer& ObjectInitializer)
 	: Super(ObjectInitializer)
 {
-	playerName = "Player X";
 }
 
-void USaveGameKitchenGuardians::AddFirstScore(int32 firstScore, FString newPlayerName)
+void USaveGameKitchenGuardian::AddFirstScore(int32 firstScore)
 {
-	playerName = newPlayerName;
 	highScoreList.Add(firstScore);
+	playerNameList.Add("Player X");
 }
 
-void USaveGameKitchenGuardians::SaveNewScore(int32 newScore)
+int32 USaveGameKitchenGuardian::SaveNewScoreAndReturnIndex(int32 newScore)
 {
+	playerNameList.Add("Player X");
+
 	bool valueIsInArray = false;
 	uint8 listSize = highScoreList.Num();
 
@@ -52,15 +53,27 @@ void USaveGameKitchenGuardians::SaveNewScore(int32 newScore)
 			{
 				int counter2 = j + 1;
 				highScoreList[counter2] = newScore;
+				// return counter2++
+				return counter2++;
+				// break
 				break;
 			}
 			if (j == 0)
 			{
 				highScoreList[j] = newScore;
+				// return 1
+				return 1;
+				// break
 				break;
 			}
 		}
 	}
 
+	return 0;
+
 }
 
+void USaveGameKitchenGuardian::ChangePlayerName(int32 listIndex, FString newPlayerName)
+{
+	playerNameList[listIndex] = newPlayerName;
+}
