@@ -87,6 +87,11 @@ public:
 	UFUNCTION(BlueprintCallable, Category = "HitpointsFunctions")
 		void GotHit(); // i am not sure whether the enemyType matters
 	
+	// Will add Full Hitpoints
+	UFUNCTION(BlueprintCallable, Category = "HitpointsFunctions")
+		void Heal(); // i am not sure whether the enemyType matters
+
+
 	// trigger event for shotFeedback
 	UFUNCTION(BlueprintImplementableEvent, Category = "FeedbackFunctions")
 		void ShotFeedback(); 
@@ -94,6 +99,10 @@ public:
 	// trigger event for gotHitFeedback
 	UFUNCTION(BlueprintImplementableEvent, Category = "FeedbackFunctions")
 		void GotHitFeedback(); 
+
+	// trigger event for HealedFeedback
+	UFUNCTION(BlueprintImplementableEvent, Category = "FeedbackFunctions")
+		void HealedFeedback();
 
 	// trigger event for diedFeedback
 	UFUNCTION(BlueprintImplementableEvent, Category = "FeedbackFunctions")

@@ -50,6 +50,17 @@ void AGuardian::GotHit()
 		
 }
 
+void AGuardian::Heal()
+{
+
+	if (hitpoints == 1)
+	{
+		hitpoints++;
+		HealedFeedback();
+	}
+
+
+}
 
 
 void AGuardian::Shot(int32 ammoCost)
