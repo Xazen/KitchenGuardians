@@ -17,17 +17,19 @@ void USaveGameKitchenGuardian::AddFirstScore(int32 firstScore)
 
 int32 USaveGameKitchenGuardian::SaveNewScoreAndReturnIndex(int32 newScore)
 {
+	// Add new Element to playerNameList
 	playerNameList.Add("Player X");
 
 	bool valueIsInArray = false;
 	uint8 listSize = highScoreList.Num();
 
-	//
+	// Check if newScore is already in highScoreList
 	for (int i = 0; i < listSize; i++)
 	{
 		if (highScoreList[i] == newScore)
 		{
 			valueIsInArray = true;
+			return 0;
 			break;
 		}
 	}
@@ -45,23 +47,27 @@ int32 USaveGameKitchenGuardian::SaveNewScoreAndReturnIndex(int32 newScore)
 			{
 				if(j != 0)
 				{
-					int counter1 = j - 1;
+					int32 counter1 = j - 1;
 					highScoreList[j] = highScoreList[counter1];
+					// Move Playernames, too
+					playerNameList[j] = playerNameList[counter1];
 				}
 			}
 			else
 			{
-				int counter2 = j + 1;
+				int32 counter2 = j + 1;
 				highScoreList[counter2] = newScore;
 				// return counter2++
-				return counter2++;
+				return (counter2 + 1);
 				// break
 				break;
 			}
 			if (j == 0)
 			{
 				highScoreList[j] = newScore;
-				// return 1
+				// Set playername from old tier 1 to second tier
+				playerNameList[1] = playerNameList[0];
+				// return 1 or 2???
 				return 1;
 				// break
 				break;
