@@ -193,6 +193,10 @@ public:
 	UFUNCTION(BlueprintImplementableEvent, Category = "SendDmgFunctions")
 		void hitToastFeedback(); 
 
+	// trigger event when Bonus Enemy reaches End of Path 
+	UFUNCTION(BlueprintImplementableEvent, Category = "MovementFunctions")
+		void ReachedEndAsBonusEnemy();
+
 	// Add Random Impulse to Gibblet
 	UFUNCTION(BlueprintCallable, Category = "FeedbackFunctions")
 		void AddGibbletImpulse2(UPrimitiveComponent* Gibblet);

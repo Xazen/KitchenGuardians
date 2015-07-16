@@ -161,9 +161,17 @@ bool AEnemies::CheckDistancePercentage()
 		}
 		else
 		{
-			guardianToast->GotHit();
-			hitToastFeedback();
-			return true;
+			if (guardianHitCaseEnum == GuardianTypeEnum::Toaster)
+			{
+				guardianToast->GotHit();
+				hitToastFeedback();
+				return true;
+			}
+			else
+			{
+				ReachedEndAsBonusEnemy();
+			}
+
 		}
 	}
 	return false;
