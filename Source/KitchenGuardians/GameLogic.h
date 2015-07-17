@@ -29,6 +29,10 @@ public:
 	UPROPERTY(BlueprintReadWrite, Category = "GameSessionProps")
 		bool isGameover;
 	
+	// Kill Counter Total
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "GameSessionProps")
+		int32 killCounterTotal;
+
 	// Kill Counter for Chillis
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "GameSessionProps")
 		int32 killCounterChillis;

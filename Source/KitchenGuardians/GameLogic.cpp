@@ -13,6 +13,7 @@ AGameLogic::AGameLogic()
 	killCounterChillis = 0;
 	killCounterMushrooms = 0;
 	killCounterPumpkin = 0;
+	killCounterTotal = 0;
 	spawnTimeDelta = 2.5f;
 	isGameover = false;
 }
@@ -20,6 +21,7 @@ AGameLogic::AGameLogic()
 void AGameLogic::AddScore(int32 addedScore, EnemyTypeEnum enemyType)
 {
 	highScore += addedScore;
+	killCounterTotal++;
 	switch (enemyType)
 	{
 	case EnemyTypeEnum::Aubergine:
