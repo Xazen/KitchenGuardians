@@ -24,6 +24,7 @@ AEnemies::AEnemies()
 	maxGibbletImpulse = 120;
 	dmgTap = 9;
 	dmgSwipe = 1;
+	RadialForcePosition = FVector(0, 0, 0);
 }
 
 // Called when the game starts or when spawned
@@ -178,7 +179,7 @@ bool AEnemies::CheckDistancePercentage()
 }
 
 
-void AEnemies::GotHit(AttackTypeEnum attackType)
+void AEnemies::GotHit(AttackTypeEnum attackType, FVector HitLocation)
 {
 	if (isEnemyVulnerable)
 	{
@@ -189,6 +190,7 @@ void AEnemies::GotHit(AttackTypeEnum attackType)
 			hitPoints -= dmgTap;
 			if (hitPoints <= 0)
 			{
+				RadialForcePosition = HitLocation;
 				diedToastFeedback();
 			}
 			else

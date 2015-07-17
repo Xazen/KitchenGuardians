@@ -55,6 +55,10 @@ public:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "EnemyPropsBalancing")
 		int32 dmgSwipe;
 
+	// Vector to determine Radial Force Position for Giblet Impulse when hit via Toast
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "EnemyProps")
+		FVector RadialForcePosition;
+
 	// whether the player can damage the enemy or will receive damage when attacking it - only used for chily by now
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "EnemyProps")
 	bool isEnemyVulnerable; //default value is true
@@ -171,7 +175,7 @@ public:
 
 	// Take calculated Damage and assign it to enemy
 	UFUNCTION(BlueprintCallable, Category = "ReceiveDmgFunctions")
-		void GotHit(AttackTypeEnum attackType);
+		void GotHit(AttackTypeEnum attackType, FVector HitLocation);
 
 	// plays all the Effects(particles, sounds, giblets...) when an Enemy got hit by a toast projectile  - but has remaining hitpoints
 	UFUNCTION(BlueprintImplementableEvent, Category = "ReceiveDmgFunctions")
