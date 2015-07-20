@@ -25,6 +25,7 @@ AEnemies::AEnemies()
 	dmgTap = 9;
 	dmgSwipe = 1;
 	RadialForcePosition = FVector(0, 0, 0);
+	triggerSlowMoPercentage = 0.95f;
 }
 
 // Called when the game starts or when spawned
@@ -174,6 +175,10 @@ bool AEnemies::CheckDistancePercentage()
 			}
 
 		}
+	}
+	if (distPerc >= triggerSlowMoPercentage&&currentSpline == (curveList.Num() - 1))
+	{
+		guardianToast->TriggerSlowMo();
 	}
 	return false;
 }
