@@ -148,6 +148,10 @@ public:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "FeedbackPropsBalancing")
 		int32 maxGibbletImpulse;
 
+	// When to trigger the slowMo - (in percentages of the last Spline)
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "FeedbackPropsBalancing")
+		float triggerSlowMoPercentage;
+
 	///
 	///	UFUNCTIONS
 	///

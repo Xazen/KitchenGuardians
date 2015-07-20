@@ -74,6 +74,10 @@ public:
 	UFUNCTION(BlueprintImplementableEvent, Category = "FeedbackFunctions")
 		void DiedFeedback();
 
+	// Trigger SlowMo
+	UFUNCTION(BlueprintImplementableEvent, Category = "FeedbackFunctions")
+		void TriggerSlowMo();
+
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
 	
