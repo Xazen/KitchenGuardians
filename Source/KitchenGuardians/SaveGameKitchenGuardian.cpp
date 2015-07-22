@@ -18,6 +18,14 @@ void USaveGameKitchenGuardian::AddFirstScore(int32 firstScore)
 
 int32 USaveGameKitchenGuardian::SaveNewScoreAndReturnIndex(int32 newScore)
 {
+	// If SaveGame already exists AddFirstScore will never be called
+	if (highScoreList.Num() == 0)
+	{
+		highScoreList.Add(newScore);
+		playerNameList.Add("Player X");
+		return 2015;
+	}
+
 	// Add new Element to playerNameList
 	playerNameList.Add("Player X");
 
