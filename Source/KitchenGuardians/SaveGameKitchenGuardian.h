@@ -28,6 +28,10 @@ public:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "SaveGameProps")
 	TArray<int32> highScoreList;
 
+	// Bool for Restart logic
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "SaveGameProps")
+	bool wasRestart;
+
 	///
 	///	UFUNCTIONS
 	///

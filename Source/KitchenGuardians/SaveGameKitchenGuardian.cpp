@@ -7,6 +7,7 @@
 USaveGameKitchenGuardian::USaveGameKitchenGuardian(const FObjectInitializer& ObjectInitializer)
 	: Super(ObjectInitializer)
 {
+	wasRestart = false;
 }
 
 void USaveGameKitchenGuardian::AddFirstScore(int32 firstScore)
