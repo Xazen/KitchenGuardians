@@ -1,0 +1,1 @@
+../../../KitchenGuardians/KitchenGuardians.uproject  /Game/Maps/Kitchen -Messaging -SessionId=49A3CE7E2748C1582C09EBA8AA491859 -SessionOwner=hackintosh -SessionName='Play On Device' -iterative
