@@ -8,6 +8,20 @@
 
 #include "GameLogic.generated.h"
 
+UENUM(BlueprintType)		//"BlueprintType" is essential to include
+enum class ScoreEventTypeEnum : uint8
+{
+	MultiKill 	UMETA(DisplayName = "MultiKill"),
+	Massacre 	UMETA(DisplayName = "Massacre"),
+	WaveComplete 	UMETA(DisplayName = "WaveComplete"),
+	GoldenMushroom 	UMETA(DisplayName = "GoldenMushroom"),
+	GoldenPumpkin 	UMETA(DisplayName = "GoldenPumpkin"),
+	SkyDirt 	UMETA(DisplayName = "SkyDirt"),
+	CloseKill 	UMETA(DisplayName = "CloseKill"),
+	Burn 	UMETA(DisplayName = "Burn")
+	
+};
+
 UCLASS()
 class KITCHENGUARDIANS_API AGameLogic : public AActor
 {
