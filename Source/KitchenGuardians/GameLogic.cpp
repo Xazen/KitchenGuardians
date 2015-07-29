@@ -21,6 +21,10 @@ AGameLogic::AGameLogic()
 void AGameLogic::AddScore(int32 addedScore, EnemyTypeEnum enemyType)
 {
 	highScore += addedScore;
+	if (highScore < 0)
+	{
+		highScore = 0;
+	}
 	killCounterTotal++;
 	switch (enemyType)
 	{
