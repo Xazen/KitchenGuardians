@@ -25,7 +25,7 @@ void AGameLogic::AddScore(int32 addedScore, EnemyTypeEnum enemyType)
 	{
 		highScore = 0;
 	}
-	killCounterTotal++;
+	
 	switch (enemyType)
 	{
 	case EnemyTypeEnum::Aubergine:
@@ -33,12 +33,15 @@ void AGameLogic::AddScore(int32 addedScore, EnemyTypeEnum enemyType)
 		break;
 	case EnemyTypeEnum::Chili:
 		killCounterChillis += 1;
+		killCounterTotal++;
 		break;
 	case EnemyTypeEnum::Mushroom:
 		killCounterMushrooms += 1;
+		killCounterTotal++;
 		break;
 	case EnemyTypeEnum::Pumpkin:
 		killCounterPumpkin++;
+		killCounterTotal++;
 		break;
 	}
 
