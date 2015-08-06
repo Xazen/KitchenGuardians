@@ -18,7 +18,8 @@ UENUM(BlueprintType)		//"BlueprintType" is essential to include
 enum class AttackTypeEnum : uint8
 {
 	Tap 	UMETA(DisplayName = "Tap"),
-	Swipe 	UMETA(DisplayName = "Swipe")
+	Swipe 	UMETA(DisplayName = "Swipe"),
+	Special UMETA(DisplayName = "Special")
 };
 
 UCLASS()

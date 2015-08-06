@@ -186,6 +186,17 @@ bool AEnemies::CheckDistancePercentage()
 
 void AEnemies::GotHit(AttackTypeEnum attackType, FVector HitLocation)
 {
+	if (attackType == AttackTypeEnum::Special)
+	{
+		hitPoints -= dmgTap;
+		if (hitPoints <= 0)
+		{
+			RadialForcePosition = HitLocation;
+			diedToastFeedback();
+		}
+		return;
+	}
+
 	if (isEnemyVulnerable)
 	{
 		switch (attackType)
