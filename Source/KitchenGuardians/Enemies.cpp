@@ -73,12 +73,20 @@ void AEnemies::Rotate(float deltaTime)
 		FRotator enemyRot = GetActorRotation();
 		FRotator targetRot = curveList[currentSpline + 1]->splineComponent->GetWorldRotationAtDistanceAlongSpline(0.0f);
 
+		//old
 		float t = deltaTime*rotationLerpSpeed;
 		float v0 = enemyRot.Yaw;
 		float v1 = targetRot.Yaw;
 		float rotation = (1 - t)*v0 + t*v1;
+
+		//new
+		FRotator enemyYaw = FRotator(0, enemyRot.Yaw, 0);
+		FRotator targetYaw = FRotator(0, targetRot.Yaw, 0);
+		FRotator DeltaYaw = targetYaw - enemyYaw;
+		DeltaYaw.Normalize();
+		
 		//float rotation = FMath::LerpStable(enemyRot.Yaw, targetRot.Yaw, deltaTime*rotationLerpSpeed); 
-		FRotator newRot = FRotator(enemyRot.Pitch, rotation, enemyRot.Roll);
+		FRotator newRot = FRotator(enemyRot.Pitch, enemyRot.Yaw+deltaTime*rotationLerpSpeed*DeltaYaw.Yaw, enemyRot.Roll);
 		SetActorRotation(newRot);
 	}
 	else
