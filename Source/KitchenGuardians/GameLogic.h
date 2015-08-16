@@ -18,7 +18,10 @@ enum class ScoreEventTypeEnum : uint8
 	GoldenPumpkin 	UMETA(DisplayName = "GoldenPumpkin"),
 	SkyDirt 	UMETA(DisplayName = "SkyDirt"),
 	CloseKill 	UMETA(DisplayName = "CloseKill"),
-	Burn 	UMETA(DisplayName = "Burn")
+	Burn 	UMETA(DisplayName = "Burn"),
+	Mushroom UMETA(DisplayName = "Mushroom"),
+	Pumpkin UMETA(DisplayName = "Pumpkin"),
+	Chilli UMETA(DisplayName = "Chilli")
 	
 };
 
