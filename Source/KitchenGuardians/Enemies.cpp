@@ -186,6 +186,7 @@ bool AEnemies::CheckDistancePercentage()
 	}
 	if (distPerc >= triggerSlowMoPercentage&&currentSpline == (curveList.Num() - 1) && guardianHitCaseEnum == GuardianTypeEnum::Toaster)
 	{
+		triggerSlowMoFeedback();
 		guardianToast->TriggerSlowMo();
 	}
 	return false;

@@ -197,6 +197,10 @@ public:
 	UFUNCTION(BlueprintImplementableEvent, Category = "ReceiveDmgFunctions")
 		void diedRiceFeedback();
 
+	// trigger event when Enemy Triggers Slowmo
+	UFUNCTION(BlueprintImplementableEvent, Category = "SendDmgFunctions")
+		void triggerSlowMoFeedback();
+
 	// trigger event when guardian toast gets hit 
 	UFUNCTION(BlueprintImplementableEvent, Category = "SendDmgFunctions")
 		void hitToastFeedback(); 
