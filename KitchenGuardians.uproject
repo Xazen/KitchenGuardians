@@ -19,5 +19,10 @@
 			"Name": "OculusRift",
 			"Enabled": false
 		}
+	],
+	"TargetPlatforms": [
+		"IOS",
+		"WindowsNoEditor",
+		"Android"
 	]
 }
