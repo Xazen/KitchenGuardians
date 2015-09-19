@@ -18,6 +18,10 @@
 		{
 			"Name": "OculusRift",
 			"Enabled": false
+		},
+		{
+			"Name": "ScriptPlugin",
+			"Enabled": true
 		}
 	],
 	"TargetPlatforms": [
