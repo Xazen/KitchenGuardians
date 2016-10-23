@@ -1,6 +1,6 @@
 {
 	"FileVersion": 3,
-	"EngineAssociation": "4.7",
+	"EngineAssociation": "4.10",
 	"Category": "",
 	"Description": "",
 	"Modules": [
@@ -19,5 +19,8 @@
 			"Name": "OculusRift",
 			"Enabled": false
 		}
+	],
+	"TargetPlatforms": [
+		"IOS"
 	]
 }
