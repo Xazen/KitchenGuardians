@@ -7,3 +7,7 @@ Saved
 /Config/DefaultEditorUserSettings.ini
 /KitchenGuardians.opensdf
 /Binaries/IOS
+/KitchenGuardians.VC.db
+/.vs
+/Binaries/Win64/KitchenGuardiansEditor.target
+/Binaries/Win64/UE4Editor.modules
