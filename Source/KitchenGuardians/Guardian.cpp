@@ -25,8 +25,6 @@ void AGuardian::Tick( float DeltaTime )
 	Super::Tick( DeltaTime );
 }
 
-
-
 void AGuardian::GotHit()
 {
 	

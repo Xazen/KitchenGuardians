@@ -11,18 +11,18 @@
 UENUM(BlueprintType)		//"BlueprintType" is essential to include
 enum class ScoreEventTypeEnum : uint8
 {
-	MultiKill 	UMETA(DisplayName = "MultiKill"),
-	Massacre 	UMETA(DisplayName = "Massacre"),
+	MultiKill 		UMETA(DisplayName = "MultiKill"),
+	Massacre 		UMETA(DisplayName = "Massacre"),
 	WaveComplete 	UMETA(DisplayName = "WaveComplete"),
 	GoldenMushroom 	UMETA(DisplayName = "GoldenMushroom"),
 	GoldenPumpkin 	UMETA(DisplayName = "GoldenPumpkin"),
-	SkyDirt 	UMETA(DisplayName = "SkyDirt"),
-	CloseKill 	UMETA(DisplayName = "CloseKill"),
-	Burn 	UMETA(DisplayName = "Burn"),
-	Mushroom UMETA(DisplayName = "Mushroom"),
-	Pumpkin UMETA(DisplayName = "Pumpkin"),
-	Chilli UMETA(DisplayName = "Chilli")
-	
+	SkyDirt 		UMETA(DisplayName = "SkyDirt"),
+	CloseKill 		UMETA(DisplayName = "CloseKill"),
+	Burn 			UMETA(DisplayName = "Burn"),
+	Mushroom		UMETA(DisplayName = "Mushroom"),
+	Pumpkin			UMETA(DisplayName = "Pumpkin"),
+	PumpkinBlue		UMETA(DisplayName = "PumpkinBlue"),
+	Chilli			UMETA(DisplayName = "Chilli")
 };
 
 UCLASS()
@@ -58,13 +58,13 @@ public:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "GameSessionProps")
 		int32 killCounterMushrooms;
 
-	// Kill Counter for Onions
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "GameSessionProps")
-		int32 killCounterOnions;
-
 	// Kill Counter for Pumpkins
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "GameSessionProps")
 		int32 killCounterPumpkin;
+
+	// Kill Counter for Blue Pumpkins
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "GameSessionProps")
+		int32 killCounterBluePumpkin;
 	
 	// The initial TimeDelta between Spawns
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "SpawningEnemies")

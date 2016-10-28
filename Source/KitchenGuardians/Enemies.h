@@ -13,18 +13,19 @@
 UENUM(BlueprintType)		//"BlueprintType" is essential to include
 enum class EnemyTypeEnum : uint8
 {
-	Aubergine 	UMETA(DisplayName = "Aubergine"),
 	Mushroom 	UMETA(DisplayName = "Mushroom"),
 	Chili		UMETA(DisplayName = "Chili"),
-	Pumpkin		UMETA(DisplayName = "Pumpkin")
+	Pumpkin		UMETA(DisplayName = "Pumpkin"),
+	PumpkinBlue UMETA(DisplayName = "PumpkinBlue"),
+	NoType		UMETA(DisplayName = "NoType")
 };
 
 UENUM(BlueprintType)		//"BlueprintType" is essential to include
 enum class EnemyMoveTypeEnum : uint8
 {
 	Standard 	UMETA(DisplayName = "Standard"),
-	Tank 	UMETA(DisplayName = "Tank"),
-	Fast	UMETA(DisplayName = "Fast")
+	Tank 		UMETA(DisplayName = "Tank"),
+	Fast		UMETA(DisplayName = "Fast")
 };
 
 UCLASS()
