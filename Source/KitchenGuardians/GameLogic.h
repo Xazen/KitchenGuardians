@@ -87,7 +87,6 @@ public:
 	UFUNCTION(BlueprintCallable, Category = "SpawningFunctions")
 		float newSpawnDeltaTime();
 
-
 	// initializes the game over sequence
 	UFUNCTION(BlueprintCallable, Category = "GameOver")
 		void gameOver();
@@ -95,6 +94,10 @@ public:
 	// executes the game over sequence
 	UFUNCTION(BlueprintImplementableEvent, Category = "GameOver")
 		void gameOverExecute(); // i am not sure whether the enemyType matters
+
+	// Restart the level
+	UFUNCTION(BlueprintCallable, Category = "Restart")
+		void RestartLevel();
 
 	
 	// Called when the game starts or when spawned

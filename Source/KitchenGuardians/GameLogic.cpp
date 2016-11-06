@@ -78,6 +78,13 @@ void AGameLogic::gameOver()
 }
 
 
+//
+void AGameLogic::RestartLevel()
+{
+	FString options = "";
+	UGameplayStatics::OpenLevel(this, "/Game/Maps/Kitchen", true, options);
+}
+
 // Called when the game starts or when spawned
 void AGameLogic::BeginPlay()
 {
