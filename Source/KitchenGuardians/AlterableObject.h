@@ -13,4 +13,19 @@ class KITCHENGUARDIANS_API AAlterableObject : public AActor
 public:	
 	// Sets default values for this actor's properties
 	AAlterableObject();
+
+	///
+	///	UPROPERTYS
+	///
+
+	// Start Position of Alterable Object
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Reset")
+	FVector startPosition;
+
+	// Start Rotation of Alterable Object
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Reset")
+	FRotator startRotation;
+
+	// Called when the level reset function was called
+	//virtual void Reset() override;
 };

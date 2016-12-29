@@ -10,3 +10,9 @@ AAlterableObject::AAlterableObject()
 	// Constructor
 }
 
+/*
+void AAlterableObject::Reset()
+{
+	this->SetActorLocation(startPosition, false);
+}
+*/
