@@ -4,15 +4,6 @@
 #include "AlterableObject.h"
 
 
-// Sets default values
+// Constructor
 AAlterableObject::AAlterableObject()
-{
-	// Constructor
-}
-
-/*
-void AAlterableObject::Reset()
-{
-	this->SetActorLocation(startPosition, false);
-}
-*/
+{}

@@ -20,12 +20,13 @@ public:
 
 	// Start Position of Alterable Object
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Reset")
+	bool firstStart;
+
+	// Start Position of Alterable Object
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Reset")
 	FVector startPosition;
 
 	// Start Rotation of Alterable Object
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Reset")
 	FRotator startRotation;
-
-	// Called when the level reset function was called
-	//virtual void Reset() override;
 };
