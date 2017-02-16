@@ -18,7 +18,7 @@ public:
 	///	UPROPERTYS
 	///
 
-	// Start Position of Alterable Object
+	// Boolean to prevent saving wrong actor position  
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Reset")
 	bool firstStart;
 
@@ -29,4 +29,8 @@ public:
 	// Start Rotation of Alterable Object
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Reset")
 	FRotator startRotation;
+
+	// Boolean to differentiate between early restart and when actor has been moved and/or rotated
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Reset")
+	bool physicsTriggered;
 };
