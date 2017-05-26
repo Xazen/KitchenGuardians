@@ -30,7 +30,7 @@ public:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Reset")
 	FRotator startRotation;
 
-	// Boolean to differentiate between early restart and when actor has been moved and/or rotated
+	// Boolean to prevent that object is set invisible from delay
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Reset")
-	bool physicsTriggered;
+	bool resetWasFaster;
 };
